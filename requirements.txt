@@ -1,0 +1,8 @@
+SpeechRecognition==3.10.4
+pyaudio==0.2.14
+pvporcupine==3.0.2
+pvrecorder==1.2.2
+pyttsx3==2.90
+python-vlc==3.0.20123
+python-dotenv==1.0.1
+requests==2.31.0
