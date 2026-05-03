@@ -20,9 +20,18 @@ class WakeWordListener:
         try:
             self.mic_index = mic_index
             self.microphone = sr.Microphone(device_index=mic_index)
+
+            # Make wake word detection very sensitive
+            self.recognizer.energy_threshold = 300
+            self.recognizer.dynamic_energy_threshold = True
+            self.recognizer.dynamic_energy_adjustment_damping = 0.15
+            self.recognizer.dynamic_energy_ratio = 1.5
+            self.recognizer.pause_threshold = 0.8
+
             with self.microphone as source:
                 self.recognizer.adjust_for_ambient_noise(source, duration=1)
-            print(f"[WakeWord] Initialized. Listening for '{WAKE_WORD}'...")
+            print(f"[WakeWord] Initialized. Energy threshold: {self.recognizer.energy_threshold}")
+            print(f"[WakeWord] Listening for '{WAKE_WORD}'...")
             return True
         except Exception as e:
             print(f"[WakeWord] Initialization error: {e}")
@@ -46,17 +55,21 @@ class WakeWordListener:
                 audio, language=SPEECH_LANGUAGE
             )
             text_lower = text.lower().strip()
+            print(f"[WakeWord] Heard: '{text_lower}'")
 
             # Check if wake word is in the recognized text
-            if WAKE_WORD in text_lower or "arcano" in text_lower:
-                print(f"[WakeWord] '{WAKE_WORD}' detected! (heard: {text_lower})")
+            if WAKE_WORD in text_lower or "arcano" in text_lower or "arcana" in text_lower:
+                print(f"[WakeWord] WAKE WORD DETECTED!")
                 return True
 
             return False
 
-        except (sr.WaitTimeoutError, sr.UnknownValueError):
+        except sr.WaitTimeoutError:
             return False
-        except sr.RequestError:
+        except sr.UnknownValueError:
+            return False
+        except sr.RequestError as e:
+            print(f"[WakeWord] Network error (need internet): {e}")
             return False
 
     def cleanup(self):

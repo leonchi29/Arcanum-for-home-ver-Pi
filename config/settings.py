@@ -12,7 +12,7 @@ APP_AUTHOR = "Carlos"
 APP_NAME = "Arcanum"
 
 # Weather (via wttr.in — no API key needed)
-WEATHER_CITY = "Santiago"
+WEATHER_CITY = "Colina,Santiago"
 WEATHER_COUNTRY = "CL"
 
 # Listen timeout (seconds) — cancels if no speech detected
@@ -152,7 +152,7 @@ TTS_LANGUAGE = "es"
 TTS_RATE = 160
 
 # Home location
-HOME_LOCATION = "Santiago, Chile"
+HOME_LOCATION = "Colina, Santiago, Chile"
 
 # User profiles storage
 PROFILES_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".profiles.json")
