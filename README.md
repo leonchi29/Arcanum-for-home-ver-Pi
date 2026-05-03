@@ -66,38 +66,61 @@ Bio Bio, Cooperativa, Rock and Pop, Futuro, Concierto, Pudahuel, Corazón, ADN, 
 
 ## Instalación en Raspberry Pi 5
 
+### 1. Instalar dependencias del sistema
+```bash
+sudo apt update
+sudo apt install -y git python3-dev python3-venv python3-tk python3-pil python3-pil.imagetk \
+  portaudio19-dev vlc chromium-browser espeak espeak-data xdotool wireless-tools alsa-utils \
+  pulseaudio libatlas-base-dev flac libjpeg-dev libpng-dev libtiff-dev libfreetype6-dev \
+  liblcms2-dev libwebp-dev zlib1g-dev libffi-dev libopenjp2-7-dev libharfbuzz-dev
+```
+
+### 2. Clonar el repositorio
 ```bash
 git clone https://github.com/leonchi29/Arcanum-for-home-ver-Pi.git
 cd Arcanum-for-home-ver-Pi
-chmod +x install.sh
-./install.sh
 ```
 
-**No necesitas configurar nada.** El instalador:
-1. Actualiza el sistema
-2. Instala dependencias (python3-tk, vlc, chromium, espeak, xdotool, etc)
-3. Crea entorno virtual Python
-4. Instala paquetes pip
-5. Configura audio
-6. Crea servicio systemd para auto-inicio
+### 3. Crear entorno virtual con paquetes del sistema
+```bash
+python3 -m venv --system-site-packages venv
+source venv/bin/activate
+```
 
-### Ejecutar
+### 4. Instalar paquetes Python
+```bash
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+```
 
+### 5. Ejecutar
 ```bash
 source venv/bin/activate
 python main.py
 ```
 
-O reinicia para auto-inicio:
+### Auto-inicio (opcional)
+Ejecuta el instalador para configurar el servicio systemd que arranca Arcanum al encender:
 ```bash
+chmod +x install.sh
+./install.sh
 sudo reboot
+```
+
+### Si Pillow da error al instalar
+```bash
+rm -rf venv
+python3 -m venv --system-site-packages venv
+source venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
 ```
 
 ### Primera Ejecución
 1. Conecta tu micrófono USB
 2. Arcanum te pide repetir 7 frases para calibrar
 3. Te pregunta tu nombre
-4. ¡Listo! Di **"Arcanum"** para activar
+4. ¡Listo! Di **"Arcanum"** o toca el botón 🎤 para activar
 
 ## Estructura del Proyecto
 
