@@ -118,6 +118,7 @@ step "Installing system dependencies..."
 PACKAGES=(
     python3-pip
     python3-venv
+    python3-dev
     python3-tk
     python3-pil
     python3-pil.imagetk
@@ -133,6 +134,16 @@ PACKAGES=(
     pulseaudio
     libatlas-base-dev
     flac
+    libjpeg-dev
+    libpng-dev
+    libtiff-dev
+    libfreetype6-dev
+    liblcms2-dev
+    libwebp-dev
+    zlib1g-dev
+    libffi-dev
+    libopenjp2-7-dev
+    libharfbuzz-dev
 )
 
 for pkg in "${PACKAGES[@]}"; do
