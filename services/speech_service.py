@@ -14,17 +14,19 @@ class SpeechService:
         self.mic_index = self._find_usb_microphone()
         self.microphone = sr.Microphone(device_index=self.mic_index)
 
-        # Lower energy threshold for better sensitivity
-        self.recognizer.energy_threshold = 300
-        self.recognizer.dynamic_energy_threshold = True
-        self.recognizer.dynamic_energy_adjustment_damping = 0.15
-        self.recognizer.dynamic_energy_ratio = 1.5
-        self.recognizer.pause_threshold = 0.8
+        # Very low energy threshold — MUST hear even quiet voices
+        self.recognizer.energy_threshold = 200
+        self.recognizer.dynamic_energy_threshold = False  # Don't auto-adjust up
+        self.recognizer.pause_threshold = 1.0
 
-        # Adjust for ambient noise on startup
+        # Quick test: verify mic actually captures audio
+        print("[Speech] Testing microphone...")
         with self.microphone as source:
-            print("[Speech] Calibrating microphone for ambient noise...")
             self.recognizer.adjust_for_ambient_noise(source, duration=2)
+        # Force threshold low after calibration (calibration can set it too high)
+        if self.recognizer.energy_threshold > 1000:
+            print(f"[Speech] Threshold too high ({self.recognizer.energy_threshold}), forcing to 400")
+            self.recognizer.energy_threshold = 400
         print(f"[Speech] Microphone ready. Energy threshold: {self.recognizer.energy_threshold}")
 
     def _find_usb_microphone(self) -> int | None:

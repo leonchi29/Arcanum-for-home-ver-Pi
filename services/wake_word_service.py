@@ -21,15 +21,16 @@ class WakeWordListener:
             self.mic_index = mic_index
             self.microphone = sr.Microphone(device_index=mic_index)
 
-            # Make wake word detection very sensitive
-            self.recognizer.energy_threshold = 300
-            self.recognizer.dynamic_energy_threshold = True
-            self.recognizer.dynamic_energy_adjustment_damping = 0.15
-            self.recognizer.dynamic_energy_ratio = 1.5
-            self.recognizer.pause_threshold = 0.8
+            # Very sensitive — must hear wake word
+            self.recognizer.energy_threshold = 200
+            self.recognizer.dynamic_energy_threshold = False
+            self.recognizer.pause_threshold = 1.0
 
             with self.microphone as source:
                 self.recognizer.adjust_for_ambient_noise(source, duration=1)
+            # Force low after calibration
+            if self.recognizer.energy_threshold > 1000:
+                self.recognizer.energy_threshold = 400
             print(f"[WakeWord] Initialized. Energy threshold: {self.recognizer.energy_threshold}")
             print(f"[WakeWord] Listening for '{WAKE_WORD}'...")
             return True

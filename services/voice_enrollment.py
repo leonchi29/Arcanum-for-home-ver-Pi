@@ -25,6 +25,10 @@ class VoiceEnrollment:
                     data = json.load(f)
                 self._profiles = data.get("profiles", [])
                 self._active_user = data.get("active_user")
+                # Validate — if profiles is empty or corrupted, reset
+                if not self._profiles or not isinstance(self._profiles, list):
+                    self._profiles = []
+                    self._active_user = None
             except Exception:
                 self._profiles = []
                 self._active_user = None

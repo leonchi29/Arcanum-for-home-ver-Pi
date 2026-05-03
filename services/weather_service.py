@@ -3,7 +3,7 @@ Weather service using wttr.in — no API key needed.
 Scrapes weather data from the web, returns spoken-friendly Spanish text.
 """
 import requests
-from config.settings import WEATHER_CITY
+from config.settings import WEATHER_CITY, WEATHER_COUNTRY
 
 
 class WeatherService:
@@ -13,7 +13,11 @@ class WeatherService:
 
     def get_weather(self, city: str = "") -> str:
         """Get current weather. Returns a spoken-friendly Spanish string."""
-        target_city = city.strip() if city else WEATHER_CITY
+        if city.strip():
+            target_city = city.strip()
+        else:
+            # Include country code for precision: "Colina,Chile"
+            target_city = f"{WEATHER_CITY},{WEATHER_COUNTRY}"
 
         # Try wttr.in JSON format
         result = self._wttr_json(target_city)

@@ -12,7 +12,8 @@ APP_AUTHOR = "Carlos"
 APP_NAME = "Arcanum"
 
 # Weather (via wttr.in — no API key needed)
-WEATHER_CITY = "Colina,Santiago"
+# Use ~location for GPS-like precision, or city name
+WEATHER_CITY = "Colina"
 WEATHER_COUNTRY = "CL"
 
 # Listen timeout (seconds) — cancels if no speech detected
