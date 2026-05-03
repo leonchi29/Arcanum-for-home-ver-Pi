@@ -74,8 +74,10 @@ class HelpOverlay:
             "Música": "🎵",
             "Streaming": "📺",
             "Control": "🎛️",
+            "Navegación": "🧭",
             "Info": "ℹ️",
             "Utilidades": "🔧",
+            "Modos": "⚡",
             "Sistema": "⚙️",
         }
 

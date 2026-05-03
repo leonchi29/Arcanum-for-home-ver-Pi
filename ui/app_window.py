@@ -39,6 +39,10 @@ class AppWindow:
         self._qr_photo = None  # Keep reference for Tkinter
         self._listening_anim_id = None
         self._listening_dots = 0
+        self._keyboard_frame = None
+        self._keyboard_active = False
+        self._keyboard_text = ""
+        self._talk_callback = None
 
         self._build_ui()
 
@@ -177,11 +181,20 @@ class AppWindow:
         self.listening_icon.pack(side="left", padx=(15, 5))
 
         self.listening_text = tk.Label(
-            self.listening_frame, text=f'Say "{APP_NAME}" to activate',
+            self.listening_frame, text=f'Di "{APP_NAME}" o toca el botón',
             font=("Helvetica", 16), fg=COLOR_DIM, bg=COLOR_LISTENING_BG,
-            anchor="w", wraplength=500, justify="left",
+            anchor="w", wraplength=400, justify="left",
         )
         self.listening_text.pack(side="left", fill="both", expand=True, padx=10)
+
+        # Talk button (push-to-talk via touchscreen)
+        self.talk_btn = tk.Button(
+            self.listening_frame, text="🎤", font=("Helvetica", 28),
+            fg="#ffffff", bg="#0066cc", activebackground="#0088ff",
+            relief="flat", width=3, height=1,
+            command=self._on_talk_pressed,
+        )
+        self.talk_btn.pack(side="right", padx=(5, 15))
 
         # Conversation area
         chat_container = tk.Frame(right_col, bg=COLOR_BG)
@@ -280,7 +293,7 @@ class AppWindow:
             self.listening_frame.configure(bg=COLOR_LISTENING_BG)
             self.listening_icon.configure(text="", bg=COLOR_LISTENING_BG)
             self.listening_text.configure(
-                text=f'Di "{APP_NAME}" para activar',
+                text=f'Di "{APP_NAME}" o toca el botón',
                 fg=COLOR_DIM, bg=COLOR_LISTENING_BG,
                 font=("Helvetica", 16),
             )
@@ -355,6 +368,15 @@ class AppWindow:
         self.screensaver.hide()
         self._reset_screensaver_timer()
 
+    def set_talk_callback(self, callback) -> None:
+        """Set the callback for the push-to-talk button."""
+        self._talk_callback = callback
+
+    def _on_talk_pressed(self) -> None:
+        """Handle talk button press."""
+        if self._talk_callback:
+            self._talk_callback()
+
     def bring_to_front(self) -> None:
         """Bring the Arcanum window to the front."""
         self.root.deiconify()
@@ -362,6 +384,115 @@ class AppWindow:
         self.root.attributes("-topmost", True)
         self.root.after(100, lambda: self.root.attributes("-topmost", False))
         self.root.focus_force()
+
+    # ===== ON-SCREEN KEYBOARD =====
+
+    def show_keyboard(self) -> None:
+        """Show an on-screen keyboard overlay for typing credentials/captcha."""
+        if self._keyboard_active:
+            return
+
+        self._keyboard_active = True
+        self._keyboard_text = ""
+
+        self._keyboard_frame = tk.Frame(self.main_frame, bg="#0a1628")
+        self._keyboard_frame.place(relx=0, rely=0.5, relwidth=1, relheight=0.5)
+
+        # Text display
+        top_bar = tk.Frame(self._keyboard_frame, bg=COLOR_BG_CARD, height=50)
+        top_bar.pack(fill="x", padx=5, pady=5)
+        top_bar.pack_propagate(False)
+
+        self._kb_display = tk.Label(
+            top_bar, text="|", font=("Courier", 18),
+            fg=COLOR_ACCENT, bg=COLOR_BG_CARD, anchor="w", padx=15,
+        )
+        self._kb_display.pack(side="left", fill="both", expand=True)
+
+        # Send button
+        send_btn = tk.Button(
+            top_bar, text="Enviar ↵", font=("Helvetica", 12, "bold"),
+            fg="#ffffff", bg="#0066cc", activebackground="#0088ff",
+            relief="flat", padx=15,
+            command=self._kb_send,
+        )
+        send_btn.pack(side="right", padx=5, pady=5)
+
+        # Close button
+        close_btn = tk.Button(
+            top_bar, text="✕", font=("Helvetica", 14, "bold"),
+            fg=COLOR_LISTENING, bg=COLOR_BG_CARD, activebackground="#1a2a4a",
+            relief="flat", padx=8,
+            command=self.hide_keyboard,
+        )
+        close_btn.pack(side="right", padx=2, pady=5)
+
+        # Keyboard rows
+        keys_frame = tk.Frame(self._keyboard_frame, bg="#0a1628")
+        keys_frame.pack(fill="both", expand=True, padx=5, pady=2)
+
+        rows = [
+            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", ".", "@"],
+            ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "/", "_"],
+            ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ñ", "+"],
+            ["⇧", "z", "x", "c", "v", "b", "n", "m", ",", ".", "⌫"],
+            ["SPACE"],
+        ]
+
+        for row_keys in rows:
+            row_frame = tk.Frame(keys_frame, bg="#0a1628")
+            row_frame.pack(fill="x", pady=1)
+
+            for key in row_keys:
+                width = 4
+                if key == "SPACE":
+                    width = 40
+                elif key in ("⇧", "⌫"):
+                    width = 5
+
+                btn = tk.Button(
+                    row_frame, text=key, font=("Helvetica", 13),
+                    fg=COLOR_TEXT, bg="#162844", activebackground="#1e3a5f",
+                    relief="flat", width=width, height=1,
+                    command=lambda k=key: self._kb_press(k),
+                )
+                btn.pack(side="left", padx=1, pady=1, expand=(key == "SPACE"))
+
+    def hide_keyboard(self) -> None:
+        """Hide the on-screen keyboard."""
+        if not self._keyboard_active:
+            return
+        self._keyboard_active = False
+        if self._keyboard_frame:
+            self._keyboard_frame.destroy()
+            self._keyboard_frame = None
+
+    def _kb_press(self, key: str) -> None:
+        """Handle keyboard button press."""
+        if key == "⌫":
+            self._keyboard_text = self._keyboard_text[:-1]
+        elif key == "⇧":
+            pass  # Could toggle caps, keeping simple
+        elif key == "SPACE":
+            self._keyboard_text += " "
+        else:
+            self._keyboard_text += key
+        self._kb_display.configure(text=self._keyboard_text + "|")
+
+    def _kb_send(self) -> None:
+        """Send keyboard text to browser via xdotool."""
+        if not self._keyboard_text:
+            return
+        try:
+            from services.browser_control import BrowserControl
+            browser = BrowserControl()
+            browser.type_text(self._keyboard_text)
+            browser.click_or_select()  # Press Enter after typing
+        except Exception as e:
+            print(f"[Keyboard] Send error: {e}")
+        self._keyboard_text = ""
+        self._kb_display.configure(text="|")
+        self.hide_keyboard()
 
     # ===== PRIVATE METHODS =====
 

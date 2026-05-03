@@ -1,38 +1,27 @@
 """
-Wake word listener using Porcupine (Picovoice).
-Detects the custom wake word "Arcanum".
+Wake word listener for Arcanum.
+Uses Google Speech Recognition to detect "Arcanum" in continuous audio.
+No external API keys or Porcupine needed.
 """
-import struct
-import pvporcupine
-from pvrecorder import PvRecorder
-from config.settings import PICOVOICE_ACCESS_KEY, WAKE_WORD
+import speech_recognition as sr
+from config.settings import WAKE_WORD, SPEECH_LANGUAGE
 
 
 class WakeWordListener:
-    """Listens for the wake word 'Arcanum' using Porcupine."""
+    """Listens for the wake word 'Arcanum' using speech recognition."""
 
     def __init__(self):
-        self.porcupine = None
-        self.recorder = None
+        self.recognizer = sr.Recognizer()
+        self.mic_index = None
+        self.microphone = None
 
-    def initialize(self) -> bool:
-        """Initialize wake word detection engine."""
-        if not PICOVOICE_ACCESS_KEY:
-            print("[WakeWord] No Picovoice access key configured.")
-            print("[WakeWord] Get a free key at https://console.picovoice.ai/")
-            print("[WakeWord] Falling back to keyword-based detection.")
-            return False
-
+    def initialize(self, mic_index: int | None = None) -> bool:
+        """Initialize wake word detection with given mic index."""
         try:
-            # Use built-in keyword or custom trained model
-            self.porcupine = pvporcupine.create(
-                access_key=PICOVOICE_ACCESS_KEY,
-                keywords=["computer"],  # Use 'computer' as base, rename via UI
-            )
-            self.recorder = PvRecorder(
-                frame_length=self.porcupine.frame_length,
-                device_index=-1,  # Default audio device
-            )
+            self.mic_index = mic_index
+            self.microphone = sr.Microphone(device_index=mic_index)
+            with self.microphone as source:
+                self.recognizer.adjust_for_ambient_noise(source, duration=1)
             print(f"[WakeWord] Initialized. Listening for '{WAKE_WORD}'...")
             return True
         except Exception as e:
@@ -40,26 +29,36 @@ class WakeWordListener:
             return False
 
     def wait_for_wake_word(self) -> bool:
-        """Block until wake word is detected. Returns True on detection."""
-        if not self.porcupine or not self.recorder:
+        """
+        Listen for the wake word. Returns True when detected.
+        Blocks until wake word is heard or timeout.
+        """
+        if not self.microphone:
             return False
 
-        self.recorder.start()
         try:
-            while True:
-                pcm = self.recorder.read()
-                keyword_index = self.porcupine.process(pcm)
-                if keyword_index >= 0:
-                    print(f"[WakeWord] '{WAKE_WORD}' detected!")
-                    return True
-        except KeyboardInterrupt:
+            with self.microphone as source:
+                audio = self.recognizer.listen(
+                    source, timeout=10, phrase_time_limit=5,
+                )
+
+            text = self.recognizer.recognize_google(
+                audio, language=SPEECH_LANGUAGE
+            )
+            text_lower = text.lower().strip()
+
+            # Check if wake word is in the recognized text
+            if WAKE_WORD in text_lower or "arcano" in text_lower:
+                print(f"[WakeWord] '{WAKE_WORD}' detected! (heard: {text_lower})")
+                return True
+
             return False
-        finally:
-            self.recorder.stop()
+
+        except (sr.WaitTimeoutError, sr.UnknownValueError):
+            return False
+        except sr.RequestError:
+            return False
 
     def cleanup(self):
         """Release resources."""
-        if self.recorder:
-            self.recorder.delete()
-        if self.porcupine:
-            self.porcupine.delete()
+        pass  # No special cleanup needed for speech recognition

@@ -1,5 +1,9 @@
 .env
 .spotify_cache
+.credentials.json
+.profiles.json
+.modes.json
+wifi_qr.png
 venv/
 __pycache__/
 *.pyc

@@ -28,9 +28,12 @@ class WebService:
                 return key
         return None
 
-    def open_service(self, service_key: str, search_query: str = "") -> dict:
+    def open_service(self, service_key: str, search_query: str = "",
+                     category: str = "") -> dict:
         """
         Open a streaming service in Chromium.
+        - search_query: deep-link to search results
+        - category: open a specific category URL
         Returns dict with status info.
         """
         if service_key not in STREAMING_SERVICES:
@@ -40,15 +43,37 @@ class WebService:
             }
 
         service = STREAMING_SERVICES[service_key]
-        url = service["url"]
 
-        # If there's a search query for Spotify web
-        if search_query and service_key == "spotify":
-            url = f"{url}/search/{search_query}"
-        elif search_query and service_key == "youtube":
-            url = f"{url}/results?search_query={search_query}"
+        # Determine which URL to open
+        if category and category in service.get("categories", {}):
+            url = service["categories"][category]
+        elif search_query and service.get("search_url"):
+            url = service["search_url"].format(
+                query=search_query.replace(" ", "+")
+            )
+        else:
+            url = service["url"]
 
-        # Close current service if any
+        # If same service already open, just navigate (don't restart browser)
+        if self.is_active and self.current_service == service_key:
+            try:
+                # Use xdotool to navigate (Ctrl+L + URL + Enter)
+                subprocess.run(
+                    ["xdotool", "search", "--name", "Chromium", "windowactivate"],
+                    capture_output=True, check=False,
+                )
+                subprocess.run(["xdotool", "key", "ctrl+l"], capture_output=True, check=False)
+                subprocess.run(["xdotool", "type", "--delay", "20", url],
+                               capture_output=True, check=False)
+                subprocess.run(["xdotool", "key", "Return"], capture_output=True, check=False)
+                msg = f"Navigating in {service['name']}"
+                if search_query:
+                    msg += f": {search_query}"
+                return {"success": True, "message": msg, "needs_login": False}
+            except Exception:
+                pass
+
+        # Close current service if a different one is open
         if self.is_active:
             self.close_service()
 
@@ -63,6 +88,7 @@ class WebService:
                         "--no-first-run",
                         "--disable-session-crashed-bubble",
                         "--disable-restore-session-state",
+                        "--autoplay-policy=no-user-gesture-required",
                         url,
                     ],
                     stdout=subprocess.DEVNULL,
@@ -75,11 +101,17 @@ class WebService:
             self.current_service = service_key
             self.is_active = True
 
-            msg = f"Opening {service['name']}"
-            if service["needs_login"]:
-                msg += ". This service may require login."
+            msg = f"Abriendo {service['name']}"
+            if search_query:
+                msg += f", buscando: {search_query}"
+            elif category:
+                msg += f", categoría: {category}"
 
-            return {"success": True, "message": msg}
+            return {
+                "success": True,
+                "message": msg,
+                "needs_login": service["needs_login"],
+            }
 
         except FileNotFoundError:
             try:
@@ -87,7 +119,11 @@ class WebService:
                 webbrowser.open(url)
                 self.current_service = service_key
                 self.is_active = True
-                return {"success": True, "message": f"Opening {service['name']} in browser"}
+                return {
+                    "success": True,
+                    "message": f"Abriendo {service['name']} en navegador",
+                    "needs_login": service["needs_login"],
+                }
             except Exception as e:
                 return {"success": False, "message": f"Error: {e}"}
         except Exception as e:

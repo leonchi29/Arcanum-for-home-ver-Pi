@@ -1,147 +1,132 @@
-# Arcanum - Voice Assistant for Raspberry Pi 5
+# Arcanum — Voice Assistant for Raspberry Pi 5
 
-Voice-controlled home assistant by **Carlos**. Responds to the wake word **"Arcanum"** with a fullscreen GUI, text-to-speech, and USB microphone support.
+Asistente de voz inteligente por **Carlos**. Pantalla completa, control por voz en español, sin API keys.
 
-## Features
+## Características
 
-### Voice Commands
+### Zero API Keys
+Todo funciona sin configurar ninguna clave. El clima viene de la web, la voz usa Google Speech Recognition gratuito, y los servicios se abren directamente en Chromium.
 
-| Command | Action |
-|---------|--------|
-| "Arcanum, reproduce [song]" | Open Spotify Web and search |
-| "Arcanum, radio [station]" | Play Chilean FM radio |
-| "Arcanum, modo comer" | Open Zapping TV news |
-| "Arcanum, netflix / disney / youtube" | Open streaming service |
-| "Arcanum, qué hora es" | Tell current time |
-| "Arcanum, fecha" | Tell current date |
-| "Arcanum, clima" | Weather report |
-| "Arcanum, alarma 7:30" | Set alarm |
-| "Arcanum, temporizador 10" | Set 10-minute timer |
-| "Arcanum, busca [topic]" | Search internet (shown in app) |
-| "Arcanum, disponible" | List all available services |
-| "Arcanum, cierra" | Close current web service |
-| "Arcanum, pausa" | Mute/pause current audio |
-| "Arcanum, continua" | Resume audio |
-| "Arcanum, sube/baja volumen" | Volume control |
-| "Arcanum, para todo" | Stop everything |
-| "Arcanum, ayuda" | List all commands |
+### Enrollment de Voz
+La primera vez que ejecutas Arcanum, te pide repetir 7 frases para calibrar el micrófono y luego pregunta tu nombre. Después te saluda personalmente: *"Claro Carlos, aquí tienes."*
 
-### Streaming Services
+### Modos de Automatización
+Crea secuencias de acciones con voz:
+- Di: *"Arcanum, configurar modo"*
+- Nombre: *"modo Santi"*
+- Acciones: *"abre YouTube"*, *"busca Super Wings"*, *"listo"*
+- Después solo di: *"Arcanum, modo Santi"* y ejecuta todo automáticamente.
+
+### Comandos de Voz (con sinónimos)
+
+| Comando | Ejemplos / Sinónimos |
+|---------|---------------------|
+| **Reproducir música** | reproduce, pon, ponme, escucha, play, dame música |
+| **Radio** | radio, pon radio, sintoniza, emisora, fm |
+| **Abrir servicio** | abre Netflix, ve a YouTube, lanza Spotify |
+| **Buscar en servicio** | busca Los Simpson en Disney |
+| **Recomendaciones** | recomiéndame, qué puedo ver, sugerencias |
+| **Hora / Fecha** | qué hora es, dime la hora, qué día es |
+| **Clima** | clima, temperatura, llueve, pronóstico |
+| **Alarma / Timer** | alarma 7:30, temporizador 10, despiértame |
+| **WiFi QR** | genera QR, comparte wifi |
+| **Pausa / Continua** | pausa, espera, dale play, continua, reanuda |
+| **Siguiente / Anterior** | siguiente, salta, skip, anterior, otra canción |
+| **Volumen** | sube volumen, más fuerte, baja, volumen al 60 |
+| **Silencio** | silencio, mute, quita sonido |
+| **Scroll** | baja, sube, desplaza abajo/arriba |
+| **Click / Enter** | click, selecciona, dale enter, acepta |
+| **Atrás** | volver atrás, regresa, back |
+| **Pantalla completa** | pantalla completa, fullscreen |
+| **Actualizar** | actualiza, recarga, refresh |
+| **Escribir texto** | escribe mi correo, tipea |
+| **Teclado** | teclado (muestra teclado en pantalla) |
+| **Login** | inicia sesión, login |
+| **Modos** | modo Santi, configurar modo, listar modos |
+| **Buscar** | busca, qué es, quién es, explica |
+| **Cerrar** | cierra, salir, cierra eso |
+| **Parar todo** | para todo, stop, basta, callate |
+| **Apagar / Reiniciar** | apaga, reinicia, shutdown, reboot |
+| **Ayuda** | ayuda, comandos, qué puedes hacer |
+
+### Servicios de Streaming
 Spotify, Netflix, Disney+, YouTube, Amazon Prime Video, Max (HBO), Paramount+, Crunchyroll, Zapping TV
 
-### Radio Stations (Chile)
+### Radios Chilenas
 Bio Bio, Cooperativa, Rock and Pop, Futuro, Concierto, Pudahuel, Corazón, ADN, La Clave, Infinita, Duna, Universo
 
-### GUI Features
-- Fullscreen display showing conversation (what you say + Arcanum's response)
-- Animated screensaver: "ARCANUM by Carlos" with floating clock
-- Listening indicator (red pulsing)
-- Active service status bar
-- Auto-screensaver after inactivity
+### GUI
+- Dashboard fullscreen estilo Alexa con tema azul oscuro
+- Reloj, fecha, clima, ubicación
+- Indicador de escucha animado (punto rojo pulsante)
+- Chat de conversación (lo que dices + respuesta)
+- Salvapantalla flotante con "ARCANUM by Carlos"
+- Overlay de ayuda con todos los comandos agrupados
+- Teclado en pantalla para credenciales y captchas
 
-### Smart Behavior
-- **Wake word interrupt**: Say "Arcanum" while using Spotify/Netflix/Radio — it mutes current audio, brings Arcanum to front, takes your command, then restores the service
-- **Service login**: Services that need login (Netflix, Spotify, etc.) will prompt you
-- **USB mic auto-detect**: Automatically finds USB microphone on Raspberry Pi
-- **Internet search**: Results shown in the app (not in a browser)
-- **Text-to-speech**: Arcanum speaks all responses
-
-## Setup on Raspberry Pi 5
-
-### 1. Install system dependencies
+## Instalación en Raspberry Pi 5
 
 ```bash
-sudo apt update
-sudo apt install -y python3-pip python3-venv python3-tk \
-    portaudio19-dev vlc chromium-browser espeak xdotool
-```
-
-### 2. Create virtual environment
-
-```bash
+git clone https://github.com/leonchi29/Arcanum-for-home-ver-Pi.git
 cd Arcanum-for-home-ver-Pi
-python3 -m venv venv
+chmod +x install.sh
+./install.sh
+```
+
+**No necesitas configurar nada.** El instalador:
+1. Actualiza el sistema
+2. Instala dependencias (python3-tk, vlc, chromium, espeak, xdotool, etc)
+3. Crea entorno virtual Python
+4. Instala paquetes pip
+5. Configura audio
+6. Crea servicio systemd para auto-inicio
+
+### Ejecutar
+
+```bash
 source venv/bin/activate
-```
-
-### 3. Install Python packages
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure credentials
-
-```bash
-cp .env.example .env
-nano .env
-```
-
-Fill in:
-- **PICOVOICE_ACCESS_KEY**: Free at https://console.picovoice.ai/
-- **OPENWEATHER_API_KEY**: Free at https://openweathermap.org/api
-
-### 5. Connect USB microphone
-
-Plug in your USB mic. Arcanum auto-detects it on startup.
-
-### 6. Run
-
-```bash
 python main.py
 ```
 
-## Auto-start on Boot (systemd)
-
+O reinicia para auto-inicio:
 ```bash
-sudo nano /etc/systemd/system/arcanum.service
+sudo reboot
 ```
 
-```ini
-[Unit]
-Description=Arcanum Voice Assistant
-After=network.target sound.target graphical.target
+### Primera Ejecución
+1. Conecta tu micrófono USB
+2. Arcanum te pide repetir 7 frases para calibrar
+3. Te pregunta tu nombre
+4. ¡Listo! Di **"Arcanum"** para activar
 
-[Service]
-Type=simple
-User=pi
-WorkingDirectory=/home/pi/Arcanum-for-home-ver-Pi
-ExecStart=/home/pi/Arcanum-for-home-ver-Pi/venv/bin/python main.py
-Restart=always
-RestartSec=5
-Environment=DISPLAY=:0
-Environment=XAUTHORITY=/home/pi/.Xauthority
-
-[Install]
-WantedBy=graphical.target
-```
-
-```bash
-sudo systemctl enable arcanum
-sudo systemctl start arcanum
-```
-
-## Project Structure
+## Estructura del Proyecto
 
 ```
 Arcanum-for-home-ver-Pi/
-├── main.py                        # Entry point (GUI + voice loop)
-├── requirements.txt               # Python dependencies
-├── .env.example                   # Template for credentials
+├── main.py                          # Punto de entrada (GUI + voz + enrollment)
+├── requirements.txt                 # Dependencias Python (sin API keys)
+├── install.sh                       # Instalador profesional para Pi
 ├── config/
-│   └── settings.py                # All configuration
+│   └── settings.py                  # Configuración (colores, radios, servicios)
 ├── services/
-│   ├── speech_service.py          # USB mic + voice recognition
-│   ├── tts_service.py             # Text-to-speech (speaks responses)
-│   ├── wake_word_service.py       # "Arcanum" detection (Porcupine)
-│   ├── command_router.py          # Command interpretation & routing
-│   ├── audio_manager.py           # System mute/unmute/volume
-│   ├── web_service.py             # Chromium manager (streaming)
-│   ├── radio_service.py           # Chilean radio streaming (VLC)
-│   ├── weather_service.py         # Weather info (OpenWeatherMap)
-│   ├── alarm_service.py           # Alarms & timers
-│   └── search_service.py          # Internet search (DuckDuckGo/Wikipedia)
+│   ├── intents.py                   # 50+ intents con sinónimos en español
+│   ├── command_router.py            # Router de comandos basado en intents
+│   ├── speech_service.py            # Reconocimiento de voz (USB mic, 10s timeout)
+│   ├── tts_service.py               # Text-to-speech offline (pyttsx3)
+│   ├── wake_word_service.py         # Detección "Arcanum" (sin Porcupine)
+│   ├── voice_enrollment.py          # Calibración de voz + perfiles de usuario
+│   ├── automation_modes.py          # Modos de automatización (macros por voz)
+│   ├── browser_control.py           # Control de Chromium por voz (xdotool)
+│   ├── credentials_service.py       # Almacenamiento de credenciales
+│   ├── web_service.py               # Gestor de Chromium (streaming)
+│   ├── radio_service.py             # Radio chilena (VLC)
+│   ├── weather_service.py           # Clima sin API (wttr.in)
+│   ├── alarm_service.py             # Alarmas y temporizadores
+│   ├── search_service.py            # Búsqueda internet (DuckDuckGo/Wikipedia)
+│   ├── audio_manager.py             # Control volumen sistema (amixer)
+│   └── wifi_qr_service.py           # Generador QR WiFi
 └── ui/
-    ├── app_window.py              # Fullscreen Tkinter GUI
-    └── screensaver.py             # Animated screensaver
+    ├── app_window.py                # Dashboard fullscreen + teclado en pantalla
+    ├── help_overlay.py              # Overlay de ayuda con todos los comandos
+    └── screensaver.py               # Salvapantalla animado
 ```

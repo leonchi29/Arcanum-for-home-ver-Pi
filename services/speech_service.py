@@ -1,7 +1,8 @@
 """
-Wake word detection and speech recognition service.
-Listens for "Arcanum" then captures the voice command.
-Supports USB microphone auto-detection on Raspberry Pi.
+Speech recognition service for Arcanum.
+USB microphone auto-detection on Raspberry Pi.
+10-second timeout — cancels listening if no speech detected.
+No external API keys required (uses Google free tier).
 """
 import speech_recognition as sr
 from config.settings import SPEECH_LANGUAGE, LISTEN_TIMEOUT, PHRASE_TIME_LIMIT
@@ -51,13 +52,18 @@ class SpeechService:
         print("[Speech] No USB mic found, using default device.")
         return None
 
-    def listen_for_command(self) -> str | None:
-        """Listen for a voice command after wake word is detected."""
+    def listen_for_command(self, timeout: int | None = None) -> str | None:
+        """
+        Listen for a voice command after wake word is detected.
+        Returns recognized text or None on timeout/failure.
+        10-second timeout by default — cancels if silence.
+        """
+        listen_timeout = timeout or LISTEN_TIMEOUT
         try:
             with self.microphone as source:
                 audio = self.recognizer.listen(
                     source,
-                    timeout=LISTEN_TIMEOUT,
+                    timeout=listen_timeout,
                     phrase_time_limit=PHRASE_TIME_LIMIT,
                 )
 
@@ -66,6 +72,7 @@ class SpeechService:
             return text.lower().strip()
 
         except sr.WaitTimeoutError:
+            print("[Speech] Timeout — no speech detected in {listen_timeout}s.")
             return None
         except sr.UnknownValueError:
             return None
@@ -93,3 +100,8 @@ class SpeechService:
             return None
         except sr.RequestError:
             return None
+
+    def recalibrate(self) -> None:
+        """Re-calibrate microphone for ambient noise."""
+        with self.microphone as source:
+            self.recognizer.adjust_for_ambient_noise(source, duration=2)
