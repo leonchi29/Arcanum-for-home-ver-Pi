@@ -70,8 +70,8 @@ Bio Bio, Cooperativa, Rock and Pop, Futuro, Concierto, Pudahuel, Corazón, ADN, 
 ```bash
 sudo apt update
 sudo apt install -y git python3-dev python3-venv python3-tk python3-pil python3-pil.imagetk \
-  portaudio19-dev vlc chromium-browser espeak espeak-data xdotool wireless-tools alsa-utils \
-  pulseaudio libatlas-base-dev flac libjpeg-dev libpng-dev libtiff-dev libfreetype6-dev \
+  portaudio19-dev vlc chromium espeak espeak-data xdotool wireless-tools alsa-utils \
+  pulseaudio libatlas3-base flac libjpeg-dev libpng-dev libtiff-dev libfreetype6-dev \
   liblcms2-dev libwebp-dev zlib1g-dev libffi-dev libopenjp2-7-dev libharfbuzz-dev
 ```
 

@@ -124,7 +124,7 @@ PACKAGES=(
     python3-pil.imagetk
     portaudio19-dev
     vlc
-    chromium-browser
+    chromium
     espeak
     espeak-data
     xdotool
@@ -132,7 +132,7 @@ PACKAGES=(
     wireless-tools
     alsa-utils
     pulseaudio
-    libatlas-base-dev
+    libatlas3-base
     flac
     libjpeg-dev
     libpng-dev
