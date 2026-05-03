@@ -129,6 +129,101 @@ pip install -r requirements.txt
 - **Desde otra terminal**: `sudo systemctl stop arcanum`
 - **Di "Arcanum, apaga el sistema"** — apaga la Pi
 
+---
+
+## Pruebas de Micrófono USB
+
+Si Arcanum no te escucha, sigue estos pasos para diagnosticar:
+
+### 1. Verificar que la Pi detecta el mic
+```bash
+arecord -l
+```
+Debe mostrar algo como `card 2: USB Audio`. Anota el número de card.
+
+### 2. Ver dispositivos USB conectados
+```bash
+lsusb
+```
+
+### 3. Subir volumen de captura al máximo
+```bash
+# Reemplaza 2 por tu número de card
+amixer -c 2 set Capture 100% unmute
+amixer -c 2 sset Mic 100% unmute
+```
+
+### 4. Ver controles del mic
+```bash
+amixer -c 2 contents
+```
+
+### 5. Grabar audio de prueba (habla fuerte y cerca, 5 segundos)
+```bash
+# Reemplaza 2 por tu número de card
+arecord -D plughw:2,0 -d 5 -f S16_LE -r 16000 test.wav
+```
+Detener grabación: **Ctrl+C**
+
+### 6. Reproducir grabación
+```bash
+aplay test.wav
+```
+
+### 7. Probar con Python (requiere venv activado)
+```bash
+source venv/bin/activate
+python3 -c "
+import speech_recognition as sr
+r = sr.Recognizer()
+r.energy_threshold = 200
+m = sr.Microphone(device_index=2)
+print('Habla ahora...')
+with m as s:
+    audio = r.listen(s, timeout=5)
+print('Reconociendo...')
+print(r.recognize_google(audio, language='es-CL'))
+"
+```
+Si imprime lo que dijiste, el mic funciona con Arcanum.
+
+### 8. Si nada funciona
+- Prueba **otro puerto USB** de la Pi
+- Prueba el mic en otra PC para verificar que no está dañado
+- Compra un **adaptador USB de audio genérico** (~$2 USD) — funcionan siempre en Linux
+- Verifica internet: `ping -c 3 google.com` (Google Speech necesita conexión)
+
+### 9. Configurar audio HDMI (salida por TV)
+```bash
+# Ver salidas disponibles
+pactl list sinks short
+
+# Poner HDMI como salida (reemplaza con el nombre que salga con "hdmi")
+pactl set-default-sink NOMBRE_DEL_SINK_HDMI
+
+# Subir volumen
+pactl set-sink-volume @DEFAULT_SINK@ 100%
+pactl set-sink-mute @DEFAULT_SINK@ 0
+
+# Probar audio
+speaker-test -c 2 -t wav
+```
+
+### 10. Configurar mic como entrada por defecto
+```bash
+# Ver fuentes de entrada
+pactl list sources short
+
+# Poner mic USB como fuente por defecto (reemplaza con nombre que tenga "usb")
+pactl set-default-source NOMBRE_DEL_SOURCE_USB
+
+# Subir volumen de entrada
+pactl set-source-volume @DEFAULT_SOURCE@ 100%
+pactl set-source-mute @DEFAULT_SOURCE@ 0
+```
+
+---
+
 ## Estructura del Proyecto
 
 ```
