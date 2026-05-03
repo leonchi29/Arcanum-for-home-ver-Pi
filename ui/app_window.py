@@ -24,10 +24,12 @@ class AppWindow:
         self.root.title(APP_NAME)
         self.root.configure(bg=COLOR_BG)
         self.root.attributes("-fullscreen", True)
-        self.root.config(cursor="none")  # Hide cursor on Pi
+        # Show cursor for touchscreen interaction (talk button, keyboard)
+        self.root.config(cursor="")
 
-        # Allow ESC to exit fullscreen / show cursor (dev mode)
+        # Ctrl+Q to quit, ESC to toggle fullscreen
         self.root.bind("<Escape>", self._toggle_dev_mode)
+        self.root.bind("<Control-q>", lambda e: self.root.destroy())
         self.root.bind("<F11>", lambda e: self.root.attributes("-fullscreen", True))
 
         # Reset screensaver on any activity

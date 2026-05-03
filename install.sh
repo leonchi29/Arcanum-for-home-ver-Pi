@@ -127,6 +127,8 @@ PACKAGES=(
     chromium
     espeak
     espeak-data
+    espeak-ng
+    espeak-ng-data
     xdotool
     git
     wireless-tools

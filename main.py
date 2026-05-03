@@ -56,10 +56,23 @@ class Arcanum:
         """Initialize all services (runs in background thread)."""
         try:
             self._ui_msg("system", "Configurando micrófono USB...")
-            self.speech = SpeechService()
+            try:
+                self.speech = SpeechService()
+            except Exception as e:
+                self._ui_msg("system", f"⚠ Micrófono: {e}")
+                self.speech = SpeechService.__new__(SpeechService)
+                self.speech.mic_index = None
 
             self._ui_msg("system", "Configurando voz...")
-            self.tts = TTSService()
+            try:
+                self.tts = TTSService()
+            except Exception as e:
+                self._ui_msg("system", f"⚠ TTS: {e}")
+                # Minimal fallback TTS
+                self.tts = type('FallbackTTS', (), {
+                    'speak': lambda self, t: None,
+                    'speak_and_wait': lambda self, t: None,
+                })()
 
             self._ui_msg("system", "Configurando audio...")
             self.audio = AudioManager()
