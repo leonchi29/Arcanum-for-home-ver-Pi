@@ -1,7 +1,7 @@
-SpeechRecognition==3.10.4
-pyaudio==0.2.14
-pyttsx3==2.90
-python-vlc==3.0.20123
-requests==2.31.0
-qrcode[pil]==7.4.2
-Pillow==10.3.0
+SpeechRecognition
+pyaudio
+pyttsx3
+python-vlc
+requests
+qrcode[pil]
+Pillow

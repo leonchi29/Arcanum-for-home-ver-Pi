@@ -162,7 +162,7 @@ step "Setting up Python environment..."
 if [ -d "venv" ]; then
     ok "Virtual environment exists"
 else
-    python3 -m venv venv
+    python3 -m venv --system-site-packages venv
     ok "Virtual environment created"
 fi
 
@@ -174,11 +174,17 @@ ok "Activated: $(python3 --version)"
 # ============================================================
 step "Installing Python packages..."
 
-pip install --upgrade pip -q
+pip install --upgrade pip setuptools wheel -q
 ok "pip upgraded"
 
-pip install -r requirements.txt -q
-ok "All Python packages installed"
+pip install -r requirements.txt -q || {
+    warn "Some packages failed, trying one by one..."
+    while IFS= read -r pkg || [[ -n "$pkg" ]]; do
+        [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue
+        pip install "$pkg" -q 2>/dev/null && ok "$pkg" || warn "Failed: $pkg"
+    done < requirements.txt
+}
+ok "Python packages installed"
 
 # Verify critical imports
 python3 -c "import speech_recognition" 2>/dev/null && ok "SpeechRecognition OK" || warn "SpeechRecognition failed"
