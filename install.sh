@@ -124,7 +124,8 @@ PACKAGES=(
     python3-pil.imagetk
     portaudio19-dev
     vlc
-    chromium
+    chromium-browser
+    firefox
     espeak
     espeak-data
     espeak-ng
@@ -132,9 +133,14 @@ PACKAGES=(
     xdotool
     git
     wireless-tools
+    network-manager
     alsa-utils
     pulseaudio
-    libatlas3-base
+    pulseaudio-utils
+    pipewire
+    pipewire-pulse
+    wireplumber
+    libopenblas-dev
     flac
     libjpeg-dev
     libpng-dev
@@ -146,6 +152,8 @@ PACKAGES=(
     libffi-dev
     libopenjp2-7-dev
     libharfbuzz-dev
+    fonts-inter
+    fonts-noto-color-emoji
 )
 
 for pkg in "${PACKAGES[@]}"; do

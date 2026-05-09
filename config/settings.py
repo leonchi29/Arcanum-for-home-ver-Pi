@@ -19,20 +19,105 @@ WEATHER_COUNTRY = "CL"
 # Listen timeout (seconds) — cancels if no speech detected
 LISTEN_COMMAND_TIMEOUT = 10
 
-# Chilean radio stations (streaming URLs)
+# Radio stations (streaming URLs) — Chile + internacionales + temáticas
 RADIO_STATIONS = {
+    # ============== CHILE ==============
+    # Noticias / hablada
     "bio bio": "https://playerservices.streamtheworld.com/api/livestream-redirect/BBCL_SC",
     "cooperativa": "https://playerservices.streamtheworld.com/api/livestream-redirect/COOPERATIVA_SC",
+    "adn": "https://playerservices.streamtheworld.com/api/livestream-redirect/ADN_SC",
+    "agricultura": "https://server4.servers15.com:7022/stream",
+    "duna": "https://playerservices.streamtheworld.com/api/livestream-redirect/DUNA_SC",
+    "la clave": "https://playerservices.streamtheworld.com/api/livestream-redirect/LACLAVE_SC",
+    "infinita": "https://playerservices.streamtheworld.com/api/livestream-redirect/INFINITA_SC",
+    "uchile": "https://radio.uchile.cl:8443/stream",
+    # Música chilena / popular
     "rock and pop": "https://playerservices.streamtheworld.com/api/livestream-redirect/ROCKANDPOP_SC",
     "futuro": "https://playerservices.streamtheworld.com/api/livestream-redirect/FUTURO_SC",
     "concierto": "https://playerservices.streamtheworld.com/api/livestream-redirect/CONCIERTO_SC",
     "pudahuel": "https://playerservices.streamtheworld.com/api/livestream-redirect/PUDAHUEL_SC",
     "corazon": "https://playerservices.streamtheworld.com/api/livestream-redirect/CORAZON_SC",
-    "adn": "https://playerservices.streamtheworld.com/api/livestream-redirect/ADN_SC",
-    "la clave": "https://playerservices.streamtheworld.com/api/livestream-redirect/LACLAVE_SC",
-    "infinita": "https://playerservices.streamtheworld.com/api/livestream-redirect/INFINITA_SC",
-    "duna": "https://playerservices.streamtheworld.com/api/livestream-redirect/DUNA_SC",
     "universo": "https://playerservices.streamtheworld.com/api/livestream-redirect/UNIVERSO_SC",
+    "activa": "https://playerservices.streamtheworld.com/api/livestream-redirect/ACTIVA_SC",
+    "tiempo": "https://playerservices.streamtheworld.com/api/livestream-redirect/TIEMPO_SC",
+    "imagina": "https://playerservices.streamtheworld.com/api/livestream-redirect/IMAGINA_SC",
+    "romantica": "https://playerservices.streamtheworld.com/api/livestream-redirect/ROMANTICA_SC",
+    "carolina": "https://playerservices.streamtheworld.com/api/livestream-redirect/CAROLINA_SC",
+    "fmdos": "https://playerservices.streamtheworld.com/api/livestream-redirect/FMDOS_SC",
+    "oasis": "https://playerservices.streamtheworld.com/api/livestream-redirect/OASIS_SC",
+    "uno": "https://playerservices.streamtheworld.com/api/livestream-redirect/UNO_SC",
+    # Cristiana
+    "armonia": "https://radioarmonia.cl/stream",
+    "shalom": "https://server.radioshalom.cl/stream",
+    # ============== INTERNACIONALES ==============
+    "bbc": "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+    "bbc news": "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+    "cnn": "https://tunein.streamguys1.com/cnni",
+    "npr": "https://npr-ice.streamguys1.com/live.mp3",
+    "rfi": "http://live02.rfi.fr/rfimonde-64.mp3",
+    "deutsche welle": "https://dwstream02-lh.akamaihd.net/i/dwstream2_live@131329/master.m3u8",
+    "radio france": "http://direct.franceinter.fr/live/franceinter-midfi.mp3",
+    # ============== TEMÁTICAS / GLOBALES ==============
+    "lofi": "https://streams.ilovemusic.de/iloveradio17.mp3",
+    "lo-fi": "https://streams.ilovemusic.de/iloveradio17.mp3",
+    "chill": "https://streams.ilovemusic.de/iloveradio17.mp3",
+    "jazz": "https://wwfm.streamguys1.com/wwfm-mp3",
+    "jazz radio": "https://jazz-wr04.ice.infomaniak.ch/jazz-wr04-128.mp3",
+    "clasica": "https://streams.classicalking.org/king",
+    "clásica": "https://streams.classicalking.org/king",
+    "clasical": "https://streams.classicalking.org/king",
+    "salsa": "https://stream.zeno.fm/0r0xa792kwzuv",
+    "reggaeton": "https://stream.zeno.fm/yn65fsaurfhvv",
+    "trap": "https://stream.zeno.fm/3a2ffhz5ad0uv",
+    "rock": "https://radio.streemlion.com:2199/tunein/classicrock.pls",
+    "rock clasico": "https://radio.streemlion.com:2199/tunein/classicrock.pls",
+    "rock clásico": "https://radio.streemlion.com:2199/tunein/classicrock.pls",
+    "metal": "https://0n-metal.radionetz.de/0n-metal.mp3",
+    "electronica": "https://streams.ilovemusic.de/iloveradio2.mp3",
+    "electrónica": "https://streams.ilovemusic.de/iloveradio2.mp3",
+    "house": "https://streams.ilovemusic.de/iloveradio4.mp3",
+    "techno": "https://streams.ilovemusic.de/iloveradio16.mp3",
+    "edm": "https://streams.ilovemusic.de/iloveradio2.mp3",
+    "pop": "https://streams.ilovemusic.de/iloveradio.mp3",
+    "ochenta": "https://streams.ilovemusic.de/iloveradio6.mp3",
+    "ochentas": "https://streams.ilovemusic.de/iloveradio6.mp3",
+    "noventa": "https://streams.ilovemusic.de/iloveradio7.mp3",
+    "noventas": "https://streams.ilovemusic.de/iloveradio7.mp3",
+    "country": "https://18723.live.streamtheworld.com/977_COUNTRY.mp3",
+    "indie": "https://24493.live.streamtheworld.com/SAM01AAC158_SC",
+    "blues": "https://stream.zeno.fm/4w8ftd49a1zuv",
+    "soul": "https://stream.zeno.fm/k1f4z8c1f98uv",
+    "kpop": "https://streams.ilovemusic.de/iloveradio14.mp3",
+    "k-pop": "https://streams.ilovemusic.de/iloveradio14.mp3",
+    "anime": "https://kathy.torontocast.com:3060/;",
+    "ambient": "https://streams.ilovemusic.de/iloveradio17.mp3",
+    "meditacion": "https://streams.ilovemusic.de/iloveradio17.mp3",
+    "meditación": "https://streams.ilovemusic.de/iloveradio17.mp3",
+}
+
+# Sonidos ambientales (loops curados en YouTube)
+AMBIENT_SOUNDS = {
+    "lluvia": "https://www.youtube.com/watch?v=mPZkdNFkNps",
+    "tormenta": "https://www.youtube.com/watch?v=nDq6TstdEi8",
+    "bosque": "https://www.youtube.com/watch?v=xNN7iTA57jM",
+    "mar": "https://www.youtube.com/watch?v=bn9F19Hi1Lk",
+    "olas": "https://www.youtube.com/watch?v=bn9F19Hi1Lk",
+    "rio": "https://www.youtube.com/watch?v=GgynWKWxpIg",
+    "río": "https://www.youtube.com/watch?v=GgynWKWxpIg",
+    "fogata": "https://www.youtube.com/watch?v=L_LUpnjgPso",
+    "fuego": "https://www.youtube.com/watch?v=L_LUpnjgPso",
+    "ruido blanco": "https://www.youtube.com/watch?v=nMfPqeZjc2c",
+    "ruido rosa": "https://www.youtube.com/watch?v=ZXtimhT-ff4",
+    "ruido marron": "https://www.youtube.com/watch?v=RqzGzwTY-6w",
+    "ruido marrón": "https://www.youtube.com/watch?v=RqzGzwTY-6w",
+    "viento": "https://www.youtube.com/watch?v=eA3ZS1qg9q4",
+    "cafeteria": "https://www.youtube.com/watch?v=BOdLmxy06H0",
+    "cafetería": "https://www.youtube.com/watch?v=BOdLmxy06H0",
+    "tren": "https://www.youtube.com/watch?v=ohj0a4QObTw",
+    "ventilador": "https://www.youtube.com/watch?v=BL8KroGnK6Q",
+    "ballenas": "https://www.youtube.com/watch?v=ev7ZsoSAOso",
+    "binaural": "https://www.youtube.com/watch?v=K-S2VXlW9aM",
+    "frecuencia 432": "https://www.youtube.com/watch?v=M7lc1UVf-VE",
 }
 
 # Streaming services (web-based via Chromium)
@@ -119,8 +204,8 @@ STREAMING_SERVICES = {
     },
     "zapping": {
         "name": "Zapping TV",
-        "url": "https://www.zfreetv.com/",
-        "search_url": "https://www.zfreetv.com/",
+        "url": "https://app.zapping.com/",
+        "search_url": "https://app.zapping.com/search?q={query}",
         "needs_login": False,
         "type": "video",
         "categories": {},
@@ -171,20 +256,47 @@ ENROLLMENT_PHRASES = [
 ]
 
 # Screensaver settings
-SCREENSAVER_TIMEOUT = 120  # Seconds of inactivity before screensaver
+SCREENSAVER_TIMEOUT = 180  # Seconds of inactivity before screensaver
 
-# GUI colors (dark blue theme)
-COLOR_BG = "#0b1929"
-COLOR_BG_CARD = "#0f2744"
-COLOR_BG_HEADER = "#081a2e"
-COLOR_TEXT = "#e0e8f0"
-COLOR_ACCENT = "#00b4d8"
-COLOR_USER = "#4fc3f7"
-COLOR_BOT = "#00e676"
-COLOR_DIM = "#4a6a8a"
-COLOR_LISTENING = "#ff5722"
-COLOR_LISTENING_BG = "#1a1a2e"
-COLOR_HELP_BG = "#0d2137"
+# ============================================================
+# GUI THEME — Modern dark with purple/cyan accents
+# ============================================================
+# Primary backgrounds (deep, premium feel)
+COLOR_BG = "#0a0e1a"           # Main background - deep midnight
+COLOR_BG_CARD = "#141a2e"      # Card surface - slightly elevated
+COLOR_BG_HEADER = "#070a14"    # Top/bottom bars - darkest
+COLOR_BG_ELEVATED = "#1c2340"  # Hover/active state
+COLOR_BORDER = "#252d4a"       # Subtle borders
+
+# Text
+COLOR_TEXT = "#f0f4ff"         # Primary text - warm white
+COLOR_TEXT_SOFT = "#c4cce0"    # Secondary text
+COLOR_DIM = "#6b7896"          # Muted/disabled
+
+# Accents (vibrant)
+COLOR_ACCENT = "#7c3aed"       # Primary accent - vibrant purple
+COLOR_ACCENT_2 = "#06d6a0"     # Secondary accent - mint green
+COLOR_ACCENT_3 = "#22d3ee"     # Tertiary - cyan
+
+# Conversation
+COLOR_USER = "#60a5fa"         # User messages - sky blue
+COLOR_BOT = "#a78bfa"          # Arcanum messages - lavender
+COLOR_SYSTEM = "#94a3b8"       # System messages - slate
+
+# States
+COLOR_LISTENING = "#fb7185"    # Listening - coral
+COLOR_LISTENING_BG = "#1a1129" # Listening background - deep purple-black
+COLOR_PROCESSING = "#fbbf24"   # Processing - amber
+COLOR_SUCCESS = "#10b981"      # Success - emerald
+COLOR_ERROR = "#ef4444"        # Error - red
+
+# Overlays
+COLOR_HELP_BG = "#0d1124"
+COLOR_OVERLAY = "#000000"
+
+# Typography
+FONT_FAMILY = "Inter"          # Falls back to system if not installed
+FONT_FAMILY_MONO = "JetBrains Mono"
 
 # Help / Command catalog (expanded with synonyms and new features)
 COMMAND_CATALOG = [
@@ -381,5 +493,369 @@ COMMAND_CATALOG = [
         "description": "Apaga o reinicia el sistema (Raspberry Pi).",
         "example": "Arcanum, reinicia",
         "category": "Sistema",
+    },
+    {
+        "command": "captura de pantalla",
+        "description": "Toma un screenshot y lo guarda en tu carpeta personal.",
+        "example": "Arcanum, toma una captura",
+        "category": "Sistema",
+    },
+    {
+        "command": "batería / nivel de batería",
+        "description": "Reporta el estado de la batería (si aplica).",
+        "example": "Arcanum, cuánta batería queda",
+        "category": "Sistema",
+    },
+    {
+        "command": "estado del sistema / cpu / memoria",
+        "description": "Muestra uso de CPU, RAM y temperatura del Pi.",
+        "example": "Arcanum, cómo está el sistema",
+        "category": "Sistema",
+    },
+    {
+        "command": "mi ip",
+        "description": "Dice la IP local y pública del dispositivo.",
+        "example": "Arcanum, cuál es mi IP",
+        "category": "Sistema",
+    },
+    {
+        "command": "estado del wifi / señal",
+        "description": "Muestra calidad de la señal Wi-Fi.",
+        "example": "Arcanum, cómo está el wifi",
+        "category": "Sistema",
+    },
+    {
+        "command": "test de velocidad",
+        "description": "Mide la latencia de tu conexión a internet.",
+        "example": "Arcanum, velocidad de internet",
+        "category": "Sistema",
+    },
+
+    # --- Diversión ---
+    {
+        "command": "cuéntame un chiste",
+        "description": "Cuenta un chiste aleatorio.",
+        "example": "Arcanum, dime un chiste",
+        "category": "Diversión",
+    },
+    {
+        "command": "dato curioso / sabías que",
+        "description": "Comparte un dato curioso al azar.",
+        "example": "Arcanum, dime un dato curioso",
+        "category": "Diversión",
+    },
+    {
+        "command": "frase del día / motívame",
+        "description": "Lee una frase motivacional o inspiradora.",
+        "example": "Arcanum, dame una frase motivacional",
+        "category": "Diversión",
+    },
+    {
+        "command": "halágame / dime algo bonito",
+        "description": "Te dice algo positivo para alegrar tu día.",
+        "example": "Arcanum, hálagame",
+        "category": "Diversión",
+    },
+    {
+        "command": "cuéntame un cuento",
+        "description": "Narra un mini-cuento o historia.",
+        "example": "Arcanum, cuéntame una historia",
+        "category": "Diversión",
+    },
+    {
+        "command": "trivia / hazme una pregunta",
+        "description": "Lanza una pregunta de cultura general.",
+        "example": "Arcanum, juguemos trivia",
+        "category": "Diversión",
+    },
+    {
+        "command": "trabalenguas",
+        "description": "Recita un trabalenguas clásico.",
+        "example": "Arcanum, dime un trabalenguas",
+        "category": "Diversión",
+    },
+    {
+        "command": "adivinanza / acertijo",
+        "description": "Lanza un acertijo (con respuesta).",
+        "example": "Arcanum, dime una adivinanza",
+        "category": "Diversión",
+    },
+    {
+        "command": "horóscopo de [signo]",
+        "description": "Lee el horóscopo del día para tu signo.",
+        "example": "Arcanum, horóscopo de leo",
+        "category": "Diversión",
+    },
+    {
+        "command": "qué pasó un día como hoy",
+        "description": "Cuenta una efeméride de la historia para la fecha actual.",
+        "example": "Arcanum, efemérides",
+        "category": "Diversión",
+    },
+
+    # --- Juegos / Azar ---
+    {
+        "command": "lanza moneda / cara o sello",
+        "description": "Tira una moneda virtual.",
+        "example": "Arcanum, cara o sello",
+        "category": "Juegos",
+    },
+    {
+        "command": "tira dados [N caras] [cantidad]",
+        "description": "Tira uno o más dados de N caras.",
+        "example": "Arcanum, tira dos dados de 20 caras",
+        "category": "Juegos",
+    },
+    {
+        "command": "número aleatorio entre [a] y [b]",
+        "description": "Da un número aleatorio en el rango pedido.",
+        "example": "Arcanum, número aleatorio entre 1 y 50",
+        "category": "Juegos",
+    },
+    {
+        "command": "decide por mí",
+        "description": "Te ayuda a decidir cuando no puedes.",
+        "example": "Arcanum, ayúdame a decidir",
+        "category": "Juegos",
+    },
+    {
+        "command": "piedra papel tijera / cachipún",
+        "description": "Juega cachipún contigo.",
+        "example": "Arcanum, juguemos cachipún",
+        "category": "Juegos",
+    },
+
+    # --- Conocimiento ---
+    {
+        "command": "cuánto es [operación]",
+        "description": "Calculadora de voz: suma, resta, multiplica, divide, raíz, factorial, %.",
+        "example": "Arcanum, cuánto es 12 por 7 más 4",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "qué significa [palabra]",
+        "description": "Da la definición de una palabra.",
+        "example": "Arcanum, qué significa idiosincrasia",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "traduce [frase] al [idioma]",
+        "description": "Traduce a inglés, francés, alemán, italiano, japonés, etc.",
+        "example": "Arcanum, traduce 'buenos días' al japonés",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "deletrea [palabra]",
+        "description": "Deletrea una palabra letra por letra.",
+        "example": "Arcanum, deletrea Mississippi",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "valor del dólar / euro / UF / UTM",
+        "description": "Consulta tipos de cambio actualizados (mindicador.cl).",
+        "example": "Arcanum, cuánto vale la UF",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "cuánto es X dólares en pesos",
+        "description": "Conversor de moneda en tiempo real.",
+        "example": "Arcanum, cuánto es 50 euros en pesos",
+        "category": "Conocimiento",
+    },
+    {
+        "command": "cuántos km son X millas (y otros)",
+        "description": "Convierte km/millas, °C/°F, kg/libras, m/pies, pulgadas/cm.",
+        "example": "Arcanum, cuántos kilómetros son 10 millas",
+        "category": "Conocimiento",
+    },
+
+    # --- Noticias / actualidad ---
+    {
+        "command": "noticias / titulares",
+        "description": "Abre las últimas noticias en pantalla.",
+        "example": "Arcanum, dame las noticias",
+        "category": "Info",
+    },
+    {
+        "command": "noticias de deportes / fútbol",
+        "description": "Abre noticias deportivas.",
+        "example": "Arcanum, qué pasó en el fútbol",
+        "category": "Info",
+    },
+
+    # --- Sonidos ambientales ---
+    {
+        "command": "sonido de [lluvia/olas/bosque/...]",
+        "description": "Reproduce sonidos ambientales: lluvia, tormenta, bosque, mar, río, fogata, ruido blanco/rosa/marrón, viento, café, tren, ventilador, ballenas, binaurales, 432Hz.",
+        "example": "Arcanum, ponme sonido de lluvia",
+        "category": "Ambiente",
+    },
+
+    # --- Bienestar ---
+    {
+        "command": "ejercicio de respiración",
+        "description": "Te guía con la técnica 4-7-8 para calmar la ansiedad.",
+        "example": "Arcanum, ayúdame a relajarme",
+        "category": "Bienestar",
+    },
+    {
+        "command": "meditación",
+        "description": "Pone una pista para meditar.",
+        "example": "Arcanum, quiero meditar",
+        "category": "Bienestar",
+    },
+    {
+        "command": "estiramientos",
+        "description": "Te recita una rutina de estiramiento básica.",
+        "example": "Arcanum, dame una rutina de estiramiento",
+        "category": "Bienestar",
+    },
+
+    # --- Cocina ---
+    {
+        "command": "receta de [plato]",
+        "description": "Busca recetas en internet.",
+        "example": "Arcanum, receta de pan amasado",
+        "category": "Cocina",
+    },
+    {
+        "command": "agrega [item] a la lista",
+        "description": "Agrega ítems a tu lista de compras.",
+        "example": "Arcanum, agrega tomates a la lista",
+        "category": "Cocina",
+    },
+    {
+        "command": "ver mi lista / borrar lista",
+        "description": "Lee o limpia la lista de compras.",
+        "example": "Arcanum, qué hay en mi lista",
+        "category": "Cocina",
+    },
+
+    # --- Notas / recordatorios ---
+    {
+        "command": "anota [texto]",
+        "description": "Guarda una nota rápida.",
+        "example": "Arcanum, anota: comprar pasaporte mañana",
+        "category": "Notas",
+    },
+    {
+        "command": "ver mis notas",
+        "description": "Lee todas las notas guardadas.",
+        "example": "Arcanum, leer mis notas",
+        "category": "Notas",
+    },
+    {
+        "command": "borrar notas",
+        "description": "Elimina todas las notas.",
+        "example": "Arcanum, limpia notas",
+        "category": "Notas",
+    },
+    {
+        "command": "recuérdame [a las HH:MM o en N minutos]",
+        "description": "Crea un recordatorio (alarma o temporizador).",
+        "example": "Arcanum, recuérdame en 15 minutos",
+        "category": "Notas",
+    },
+
+    # --- Comunicación ---
+    {
+        "command": "abre correo",
+        "description": "Abre Gmail en el navegador.",
+        "example": "Arcanum, abre mi correo",
+        "category": "Comunicación",
+    },
+    {
+        "command": "abre calendario",
+        "description": "Abre Google Calendar.",
+        "example": "Arcanum, qué tengo hoy en mi agenda",
+        "category": "Comunicación",
+    },
+    {
+        "command": "abre maps / cómo llego a [lugar]",
+        "description": "Abre Google Maps con o sin destino.",
+        "example": "Arcanum, cómo llego a Plaza de Armas",
+        "category": "Comunicación",
+    },
+    {
+        "command": "envía mensaje / WhatsApp",
+        "description": "Abre WhatsApp Web.",
+        "example": "Arcanum, abre WhatsApp",
+        "category": "Comunicación",
+    },
+
+    # --- Identidad ---
+    {
+        "command": "quién eres",
+        "description": "Te cuenta qué es Arcanum.",
+        "example": "Arcanum, preséntate",
+        "category": "Identidad",
+    },
+    {
+        "command": "quién soy",
+        "description": "Reconocimiento de usuario.",
+        "example": "Arcanum, sabes quién soy",
+        "category": "Identidad",
+    },
+    {
+        "command": "habla más rápido / más lento",
+        "description": "Ajusta la velocidad de la voz.",
+        "example": "Arcanum, habla más rápido",
+        "category": "Identidad",
+    },
+    {
+        "command": "adiós / chao",
+        "description": "Despedida.",
+        "example": "Arcanum, hasta luego",
+        "category": "Identidad",
+    },
+
+    # --- Contenido de internet (APIs gratis) ---
+    {
+        "command": "dato de gatos",
+        "description": "Curiosidad sobre gatos (cat-fact API + traducción).",
+        "example": "Arcanum, dato felino",
+        "category": "Diversión",
+    },
+    {
+        "command": "dato de perros",
+        "description": "Curiosidad sobre perros (Dog API).",
+        "example": "Arcanum, cuéntame algo de perros",
+        "category": "Diversión",
+    },
+    {
+        "command": "consejo / aconséjame",
+        "description": "Da un consejo sabio del día (Advice Slip).",
+        "example": "Arcanum, dame un consejo",
+        "category": "Diversión",
+    },
+    {
+        "command": "estoy aburrido / qué hago",
+        "description": "Sugiere una actividad random (Bored API).",
+        "example": "Arcanum, dame una idea",
+        "category": "Diversión",
+    },
+    {
+        "command": "trivia del número [N]",
+        "description": "Trivia matemática/histórica de un número (Numbers API).",
+        "example": "Arcanum, dame trivia del número 42",
+        "category": "Diversión",
+    },
+    {
+        "command": "bola mágica / sí o no",
+        "description": "Oráculo binario que responde sí/no/tal vez.",
+        "example": "Arcanum, ¿llueve mañana? Bola mágica",
+        "category": "Juegos",
+    },
+    {
+        "command": "chuck norris",
+        "description": "Una verdad universal sobre Chuck Norris.",
+        "example": "Arcanum, dato de Chuck Norris",
+        "category": "Diversión",
+    },
+    {
+        "command": "sorpréndeme",
+        "description": "Devuelve algo aleatorio de Wikipedia.",
+        "example": "Arcanum, sorpréndeme",
+        "category": "Diversión",
     },
 ]

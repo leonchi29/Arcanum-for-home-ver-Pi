@@ -20,10 +20,15 @@ from services.wifi_qr_service import WifiQRService
 from services.browser_control import BrowserControl
 from services.credentials_service import CredentialsService
 from services.automation_modes import AutomationModes
+from services.fun_service import FunService
+from services.utility_services import (
+    Calculator, Translator, CurrencyConverter, UnitConverter,
+    NotesService, SystemInfo,
+)
 from services.intents import (
     detect_intent, extract_search_query, detect_target_service,
 )
-from config.settings import STREAMING_SERVICES
+from config.settings import STREAMING_SERVICES, AMBIENT_SOUNDS
 
 
 # Special response sentinels for the GUI/main to intercept
@@ -55,6 +60,13 @@ class CommandRouter:
         self.browser = BrowserControl()
         self.credentials = CredentialsService()
         self.modes = AutomationModes()
+        self.fun = FunService()
+        self.calc = Calculator()
+        self.translator = Translator()
+        self.currency = CurrencyConverter()
+        self.units = UnitConverter()
+        self.notes = NotesService()
+        self.sysinfo = SystemInfo()
 
         self._prompt = prompt_callback
 
@@ -152,12 +164,92 @@ class CommandRouter:
             # Keyboard
             "show_keyboard": lambda c: SENTINEL_SHOW_KEYBOARD,
             "hide_keyboard": lambda c: SENTINEL_HIDE_KEYBOARD,
+            # ===== Diversión =====
+            "joke": lambda c: self.fun.joke(),
+            "fun_fact": lambda c: self.fun.fun_fact(),
+            "quote": lambda c: self.fun.quote(),
+            "compliment": lambda c: self.fun.compliment(),
+            "tell_story": lambda c: self.fun.story(),
+            "sing": lambda c: "La la la… la, la la… mejor pongo música. Di 'reproduce algo'.",
+            "beatbox": lambda c: "Boots and cats and boots and cats… 🎤",
+            # ===== Juegos / azar =====
+            "flip_coin": lambda c: self.fun.flip_coin(),
+            "roll_dice": self._handle_dice,
+            "random_number": self._handle_random_number,
+            "decide": lambda c: self.fun.decide(),
+            "rock_paper_scissors": lambda c: self.fun.rock_paper_scissors(),
+            # ===== Calculadora / matemáticas =====
+            "calculate": lambda c: self.calc.calculate(c),
+            # ===== Definición / traducción =====
+            "definition": self._handle_definition,
+            "translate": lambda c: self.translator.translate(c),
+            "spell": lambda c: self.translator.spell(c),
+            # ===== Conversiones =====
+            "convert_currency": lambda c: self.currency.convert(c),
+            "convert_unit": lambda c: self.units.convert(c),
+            # ===== Trivia / cultura =====
+            "trivia": lambda c: self.fun.trivia(),
+            "tongue_twister": lambda c: self.fun.tongue_twister(),
+            "riddle": lambda c: self.fun.riddle(),
+            # ===== Noticias =====
+            "news": self._handle_news,
+            "sports_news": self._handle_sports_news,
+            # ===== Sonidos ambientales =====
+            "ambient_sound": self._handle_ambient,
+            # ===== Salud / bienestar =====
+            "breathing": self._handle_breathing,
+            "meditation": self._handle_meditation,
+            "stretch": self._handle_stretch,
+            # ===== Cocina =====
+            "recipe": self._handle_recipe,
+            "shopping_list": self._handle_shopping,
+            # ===== Notas / recordatorios =====
+            "add_note": lambda c: self.notes.add_note(c),
+            "list_notes": lambda c: self.notes.list_notes(),
+            "clear_notes": lambda c: self.notes.clear_notes(),
+            "reminder": self._handle_reminder,
+            # ===== Comunicación =====
+            "call_person": self._handle_call,
+            "send_message": self._handle_message,
+            "open_email": lambda c: self._open_url("https://mail.google.com", "correo"),
+            "open_calendar": lambda c: self._open_url("https://calendar.google.com", "calendario"),
+            "open_maps": self._handle_maps,
+            # ===== Sistema avanzado =====
+            "screenshot": lambda c: self.sysinfo.screenshot(),
+            "battery": lambda c: self.sysinfo.battery(),
+            "system_info": lambda c: self.sysinfo.cpu_ram() + " " + self.sysinfo.temperature(),
+            "ip_info": lambda c: self.sysinfo.ip_address(),
+            "wifi_status": lambda c: self.sysinfo.wifi_status(),
+            "speedtest": lambda c: self.sysinfo.speedtest(),
+            # ===== Horóscopo / efemérides =====
+            "horoscope": self._handle_horoscope,
+            "this_day": lambda c: self.fun.this_day_in_history(),
+            # ===== Usuario / voz =====
+            "who_am_i": lambda c: "Eres mi usuario favorito. Si quieres registrarte, ejecuta el enrolamiento de voz.",
+            "who_are_you": lambda c: "Soy Arcanum, tu asistente de voz para el hogar. Puedo poner música, controlar streaming, contarte chistes, gestionar tus notas y mucho más. Di 'ayuda' para verlo todo.",
+            "tts_speed_up": lambda c: "Ok, hablaré más rápido en la próxima sesión.",
+            "tts_speed_down": lambda c: "Ok, hablaré más pausado en la próxima sesión.",
+            # ===== Despedida =====
+            "goodbye": lambda c: "¡Hasta luego! Aquí estaré cuando me necesites.",
+            # ===== Contenido de internet (APIs gratis) =====
+            "cat_fact": lambda c: self.fun.cat_fact(),
+            "dog_fact": lambda c: self.fun.dog_fact(),
+            "advice": lambda c: self.fun.advice(),
+            "activity": lambda c: self.fun.activity(),
+            "number_trivia": self._handle_number_trivia,
+            "yes_no_oracle": lambda c: self.fun.yes_no(),
+            "chuck_norris": lambda c: self.fun.chuck_norris(),
+            "wiki_random": lambda c: self.search.search("wikipedia random"),
         }
 
         if intent in handlers:
             return handlers[intent](command)
 
-        # No intent matched → try web search as fallback
+        # No intent matched → ask user instead of silently web-searching
+        cmd_clean = command.strip()
+        if len(cmd_clean.split()) <= 2:
+            return "No te he entendido. ¿Puedes repetir o decir 'ayuda'?"
+        # For longer phrases assume it's a real question → search the web
         return self._handle_search(command)
 
     # ============================================================
@@ -556,3 +648,160 @@ class CommandRouter:
             self.radio.stop()
         if self.web.is_active:
             self.web.close_service()
+
+    # ============================================================
+    # NEW HANDLERS — DIVERSIÓN, JUEGOS, INFO, MODOS DE AMBIENTE
+    # ============================================================
+
+    def _handle_dice(self, command: str) -> str:
+        nums = re.findall(r"\d+", command)
+        sides = int(nums[0]) if nums else 6
+        count = int(nums[1]) if len(nums) > 1 else 1
+        sides = max(2, min(100, sides))
+        count = max(1, min(10, count))
+        return self.fun.roll_dice(sides, count)
+
+    def _handle_random_number(self, command: str) -> str:
+        nums = [int(n) for n in re.findall(r"\d+", command)]
+        if len(nums) >= 2:
+            return self.fun.random_number(min(nums[0], nums[1]), max(nums[0], nums[1]))
+        if len(nums) == 1:
+            return self.fun.random_number(1, nums[0])
+        return self.fun.random_number()
+
+    def _handle_number_trivia(self, command: str) -> str:
+        nums = [int(n) for n in re.findall(r"\d+", command)]
+        return self.fun.number_trivia(nums[0] if nums else None)
+
+    def _handle_definition(self, command: str) -> str:
+        text = command.lower()
+        for trig in ["qué significa", "que significa", "significado de",
+                     "definición de", "definicion de", "define",
+                     "qué quiere decir", "que quiere decir"]:
+            text = text.replace(trig, "")
+        text = text.strip(" :,.")
+        if not text:
+            return "¿Qué palabra quieres definir?"
+        return self.search.search(f"definición {text}")
+
+    def _handle_news(self, command: str) -> str:
+        return self._open_url(
+            "https://www.biobiochile.cl/", "noticias del día"
+        )
+
+    def _handle_sports_news(self, command: str) -> str:
+        return self._open_url(
+            "https://www.adnradio.cl/deportes/", "noticias deportivas"
+        )
+
+    def _handle_ambient(self, command: str) -> str:
+        cmd = command.lower()
+        match = None
+        for sound_name in AMBIENT_SOUNDS:
+            if sound_name in cmd:
+                match = sound_name
+                break
+        if not match:
+            options = ", ".join(list(AMBIENT_SOUNDS.keys())[:10])
+            return f"¿Qué sonido? Disponibles: {options}…"
+        url = AMBIENT_SOUNDS[match]
+        result = self.web._open_url(url) if hasattr(self.web, "_open_url") else None
+        # Use generic open
+        try:
+            self.web.close_service()
+        except Exception:
+            pass
+        import webbrowser
+        webbrowser.open(url)
+        return f"Reproduciendo sonido de {match}."
+
+    def _handle_breathing(self, command: str) -> str:
+        return ("Vamos a respirar juntos. Inhala 4 segundos… "
+                "retén 7 segundos… exhala 8 segundos. "
+                "Repite tres veces. Ya estás más calmado.")
+
+    def _handle_meditation(self, command: str) -> str:
+        return self._handle_ambient("ponme meditación")
+
+    def _handle_stretch(self, command: str) -> str:
+        return ("Rutina de estiramiento: 1) Cuello en círculos. "
+                "2) Hombros arriba y abajo. 3) Toca tus pies. "
+                "4) Estira los brazos al cielo. Cada uno 30 segundos.")
+
+    def _handle_recipe(self, command: str) -> str:
+        text = command.lower()
+        for trig in ["receta de", "receta", "cómo hago", "como hago",
+                     "cómo se prepara", "como se prepara", "ingredientes para"]:
+            text = text.replace(trig, "")
+        text = text.strip(" :,.")
+        if not text:
+            return "¿Receta de qué?"
+        return self._open_url(
+            f"https://www.google.com/search?q=receta+{text.replace(' ', '+')}",
+            f"recetas de {text}"
+        )
+
+    def _handle_shopping(self, command: str) -> str:
+        cmd = command.lower()
+        if any(t in cmd for t in ["ver lista", "qué hay", "que hay", "mi lista"]):
+            return self.notes.show_list()
+        if any(t in cmd for t in ["borrar lista", "limpia la lista", "limpiar lista", "vacía", "vacia"]):
+            return self.notes.clear_list()
+        return self.notes.add_to_list(command)
+
+    def _handle_reminder(self, command: str) -> str:
+        # Try to extract HH:MM
+        time_match = re.search(r"(\d{1,2})[:\s](\d{2})", command)
+        if time_match:
+            h, m = int(time_match.group(1)), int(time_match.group(2))
+            self.alarm.set_alarm(h, m)
+            return f"Recordatorio puesto para las {h}:{m:02d}."
+        # In N minutes
+        min_match = re.search(r"en\s+(\d+)\s*minutos?", command.lower())
+        if min_match:
+            mins = int(min_match.group(1))
+            self.alarm.set_timer(mins)
+            return f"Te recordaré en {mins} minutos."
+        return "Dime cuándo. Ejemplo: recuérdame en 10 minutos, o a las 18:30."
+
+    # ----------- COMUNICACIÓN -----------
+
+    def _handle_call(self, command: str) -> str:
+        text = command.lower()
+        for t in ["llama a", "llamar a", "marca a", "telefonéame", "telefoneame a"]:
+            text = text.replace(t, "")
+        name = text.strip(" :,.")
+        return f"No tengo telefonía conectada todavía. Pero apunté: 'llamar a {name}'."
+
+    def _handle_message(self, command: str) -> str:
+        return self._open_url("https://web.whatsapp.com", "WhatsApp Web")
+
+    def _handle_maps(self, command: str) -> str:
+        text = command.lower()
+        for t in ["abre maps", "abre mapas", "abre google maps", "muéstrame el mapa",
+                  "muestrame el mapa", "cómo llego a", "como llego a", "ruta a",
+                  "rutas a", "dirección a", "direccion a"]:
+            text = text.replace(t, "")
+        dest = text.strip(" :,.")
+        if dest:
+            url = f"https://www.google.com/maps/dir/?api=1&destination={dest.replace(' ', '+')}"
+            return self._open_url(url, f"ruta a {dest}")
+        return self._open_url("https://maps.google.com", "Google Maps")
+
+    def _handle_horoscope(self, command: str) -> str:
+        text = command.lower().replace("horóscopo de", "").replace("horoscopo de", "")
+        text = text.replace("horóscopo", "").replace("horoscopo", "")
+        text = text.replace("mi signo es", "").replace("signo", "").strip()
+        if not text:
+            return "¿Cuál es tu signo? Por ejemplo: 'horóscopo de leo'."
+        return self.fun.horoscope(text.split()[0])
+
+    # ----------- HELPER: open arbitrary URL -----------
+
+    def _open_url(self, url: str, label: str = "") -> str:
+        try:
+            import webbrowser
+            webbrowser.open(url)
+            return f"Abriendo {label or 'la página'}."
+        except Exception:
+            return "No pude abrir esa página."

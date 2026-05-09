@@ -1,9 +1,13 @@
 """
 Web service manager - Manages Chromium browser for streaming services.
 Handles Spotify (web), Netflix, Zapping, Disney+, etc.
+Video services auto-fullscreen; audio services run in background.
 """
 import subprocess
 import platform
+import shutil
+import threading
+import time
 from config.settings import STREAMING_SERVICES
 
 
@@ -13,6 +17,14 @@ class WebService:
         self.current_service = None
         self.is_active = False
         self._system = platform.system()
+
+    def _find_browser(self) -> str:
+        """Find an available browser binary on Linux."""
+        for candidate in ("chromium-browser", "chromium", "google-chrome",
+                          "google-chrome-stable", "firefox"):
+            if shutil.which(candidate):
+                return candidate
+        return "chromium-browser"  # fallback
 
     def get_available_services(self) -> list[str]:
         """Return list of available streaming service names."""
@@ -79,21 +91,43 @@ class WebService:
 
         try:
             if self._system == "Linux":
-                self.process = subprocess.Popen(
-                    [
-                        "chromium-browser",
-                        "--kiosk",
-                        "--noerrdialogs",
-                        "--disable-infobars",
-                        "--no-first-run",
-                        "--disable-session-crashed-bubble",
-                        "--disable-restore-session-state",
-                        "--autoplay-policy=no-user-gesture-required",
-                        url,
-                    ],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
+                browser_cmd = self._find_browser()
+                service_type = service.get("type", "video")
+
+                # Common flags
+                flags = [
+                    "--noerrdialogs",
+                    "--disable-infobars",
+                    "--no-first-run",
+                    "--disable-session-crashed-bubble",
+                    "--disable-restore-session-state",
+                    "--autoplay-policy=no-user-gesture-required",
+                ]
+
+                if service_type == "audio":
+                    # Audio: run minimized/background (like Spotify)
+                    flags = ["--app=" + url, "--window-size=400,600"] + flags
+                    self.process = subprocess.Popen(
+                        [browser_cmd] + flags,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                    # Minimize after a moment so Arcanum stays in front
+                    threading.Thread(
+                        target=self._minimize_after_delay,
+                        args=(2.0,), daemon=True,
+                    ).start()
+                else:
+                    # Video: kiosk + auto-fullscreen-video after page loads
+                    self.process = subprocess.Popen(
+                        [browser_cmd, "--kiosk"] + flags + [url],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                    threading.Thread(
+                        target=self._fullscreen_video_after_delay,
+                        args=(6.0,), daemon=True,
+                    ).start()
             else:
                 import webbrowser
                 webbrowser.open(url)
@@ -169,3 +203,31 @@ class WebService:
                 )
             except Exception:
                 pass
+
+    def _minimize_after_delay(self, delay: float) -> None:
+        """For audio services: minimize browser so Arcanum UI stays visible."""
+        time.sleep(delay)
+        try:
+            subprocess.run(
+                ["xdotool", "search", "--name", "Chromium", "windowminimize"],
+                capture_output=True, check=False,
+            )
+        except Exception:
+            pass
+
+    def _fullscreen_video_after_delay(self, delay: float) -> None:
+        """For video services: trigger play + native video fullscreen ('f' key)."""
+        time.sleep(delay)
+        try:
+            subprocess.run(
+                ["xdotool", "search", "--name", "Chromium", "windowactivate"],
+                capture_output=True, check=False,
+            )
+            time.sleep(0.4)
+            # Trigger play then native player fullscreen
+            for key in ("k", "space", "f"):
+                subprocess.run(["xdotool", "key", key],
+                               capture_output=True, check=False)
+                time.sleep(0.3)
+        except Exception:
+            pass

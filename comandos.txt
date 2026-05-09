@@ -1,0 +1,432 @@
+================================================================================
+ARCANUM — REFERENCIA COMPLETA DE COMANDOS DE VOZ
+================================================================================
+Asistente para Raspberry Pi 5 · Ubuntu 26.04 · Español Chileno (es-CL)
+Activación: di la palabra "Arcanum" o pulsa el botón del micrófono.
+Habla con naturalidad — Arcanum entiende sinónimos, modismos y frases.
+
+================================================================================
+ÍNDICE
+================================================================================
+ 1. MÚSICA Y RADIO
+ 2. STREAMING (video)
+ 3. CONTROL DE REPRODUCCIÓN
+ 4. NAVEGACIÓN WEB
+ 5. HORA, FECHA Y CLIMA
+ 6. ALARMAS, TEMPORIZADORES Y RECORDATORIOS
+ 7. CONOCIMIENTO Y CULTURA
+ 8. CONVERSIÓN Y CALCULADORA
+ 9. NOTAS Y LISTA DE COMPRAS
+10. DIVERSIÓN
+11. JUEGOS Y AZAR
+12. SONIDOS AMBIENTALES
+13. BIENESTAR
+14. COCINA
+15. NOTICIAS
+17. COMUNICACIÓN
+18. SISTEMA
+19. WIFI Y CONECTIVIDAD
+20. AUTOMATIZACIÓN (modos personalizados)
+21. IDENTIDAD Y AYUDA
+
+================================================================================
+1. MÚSICA Y RADIO
+================================================================================
+
+▶ REPRODUCIR MÚSICA
+  "Arcanum, reproduce Bohemian Rhapsody"
+      → Busca y reproduce en Spotify (default)
+  "Arcanum, pon Bad Bunny en YouTube"
+      → Reproduce en YouTube
+  "Arcanum, ponme música"
+      → Pregunta qué quieres escuchar
+  Sinónimos: pon, ponme, ponle, reproduce, escucha, play, dame música,
+             quiero escuchar, quiero oír
+
+▶ RADIOS DISPONIBLES (más de 50 estaciones)
+
+  CHILE — Hablada / Noticias:
+    bio bio · cooperativa · adn · agricultura · duna · la clave ·
+    infinita · uchile
+
+  CHILE — Música:
+    rock and pop · futuro · concierto · pudahuel · corazón · universo ·
+    activa · tiempo · imagina · romántica · carolina · fmdos · oasis · uno
+
+  CRISTIANA:
+    armonía · shalom
+
+  INTERNACIONALES:
+    bbc · bbc news · cnn · npr · rfi · deutsche welle · radio france
+
+  TEMÁTICAS / GLOBALES:
+    lofi · chill · jazz · jazz radio · clásica · salsa · reggaeton · trap ·
+    rock · rock clásico · metal · electrónica · house · techno · edm ·
+    pop · ochenta · noventa · country · indie · blues · soul · k-pop ·
+    anime · ambient · meditación
+
+  Comandos:
+    "Arcanum, ponme radio Bio Bio"
+    "Arcanum, sintoniza la radio cooperativa"
+    "Arcanum, pon radio lofi"
+    "Arcanum, qué radios hay"            → lista todas
+
+================================================================================
+2. STREAMING (video)
+================================================================================
+
+▶ ABRIR SERVICIOS:
+  "Arcanum, abre Netflix"
+  "Arcanum, abre Disney"           ("disney plus", "disney+")
+  "Arcanum, abre YouTube"
+  "Arcanum, abre HBO"              ("max", "hbo max")
+  "Arcanum, abre Prime"            ("amazon prime", "prime video")
+  "Arcanum, abre Paramount"
+  "Arcanum, abre Crunchyroll"      → o simplemente "ver anime"
+  "Arcanum, abre Spotify"
+
+▶ BUSCAR EN UN SERVICIO:
+  "Arcanum, busca Stranger Things en Netflix"
+  "Arcanum, busca Encanto en Disney"
+  "Arcanum, ver Los Simpson en Disney"
+
+▶ CATEGORÍAS:
+  "Arcanum, recomiéndame películas de Netflix"
+  "Arcanum, recomiéndame anime"
+  "Arcanum, recomiéndame infantil"
+  "Arcanum, recomiéndame terror / comedia / acción / documentales"
+
+▶ TV EN VIVO (NOTICIAS, CABLE):
+  "Arcanum, modo comer"    → abre Zapping TV
+  "Arcanum, ver tele"
+  "Arcanum, ver televisión"
+  "Arcanum, noticiero"
+
+▶ DISPONIBLES:
+  "Arcanum, qué hay disponible"
+  "Arcanum, qué servicios hay"
+  "Arcanum, lista de servicios"
+
+================================================================================
+3. CONTROL DE REPRODUCCIÓN
+================================================================================
+
+  "Arcanum, pausa"                 (sinónimos: espera, ponlo en pausa)
+  "Arcanum, continua"              (sinónimos: dale, dale play, sigue)
+  "Arcanum, siguiente"             (sinónimos: salta, otra, próxima)
+  "Arcanum, anterior"              (sinónimos: previa, vuelve)
+  "Arcanum, sube volumen"          (sinónimos: más fuerte, no escucho)
+  "Arcanum, baja volumen"          (sinónimos: más bajo, está muy fuerte)
+  "Arcanum, volumen al 60"         → ajusta a porcentaje exacto
+  "Arcanum, silencio"              (sinónimos: mutea, sin sonido)
+  "Arcanum, quita silencio"        (sinónimos: pon sonido, unmute)
+  "Arcanum, para todo"             → detiene radio + cierra navegador
+  "Arcanum, cierra"                → cierra el servicio activo
+
+================================================================================
+4. NAVEGACIÓN WEB
+================================================================================
+
+  "Arcanum, baja"                  → scroll hacia abajo
+  "Arcanum, sube"                  → scroll hacia arriba
+  "Arcanum, click" / "selecciona"  → presiona Enter o el elemento enfocado
+  "Arcanum, atrás"                 → página anterior del navegador
+  "Arcanum, pantalla completa"     → fullscreen
+  "Arcanum, actualiza"             → recarga la página (F5)
+  "Arcanum, escribe mi correo"     → tipea texto en el campo enfocado
+  "Arcanum, teclado"               → muestra teclado en pantalla
+  "Arcanum, cierra teclado"
+  "Arcanum, inicia sesión"         → autocompleta credenciales si las tienes
+
+================================================================================
+5. HORA, FECHA Y CLIMA
+================================================================================
+
+  "Arcanum, qué hora es"           (sinónimos: dime la hora, qué horas son)
+  "Arcanum, qué fecha es hoy"      (sinónimos: qué día es, en qué fecha)
+  "Arcanum, cómo está el clima"    → para tu ubicación (Colina, CL)
+  "Arcanum, qué tiempo hace"
+  "Arcanum, va a llover"
+  "Arcanum, temperatura"
+  "Arcanum, clima en Valparaíso"   → ciudad específica
+
+================================================================================
+6. ALARMAS, TEMPORIZADORES Y RECORDATORIOS
+================================================================================
+
+  "Arcanum, alarma a las 7:30"
+  "Arcanum, despiértame a las 8"
+  "Arcanum, ponme alarma a las 23:00"
+  "Arcanum, temporizador 15"        → 15 minutos
+  "Arcanum, cuenta regresiva 5"
+  "Arcanum, cancela alarma"
+  "Arcanum, recuérdame en 10 minutos"
+  "Arcanum, recuérdame a las 18:30"
+
+================================================================================
+7. CONOCIMIENTO Y CULTURA
+================================================================================
+
+▶ BÚSQUEDA EN INTERNET (DuckDuckGo + Wikipedia):
+  "Arcanum, busca quién fue Galileo"
+  "Arcanum, qué es la fotosíntesis"
+  "Arcanum, dime sobre los aztecas"
+  "Arcanum, cuándo nació Einstein"
+  "Arcanum, dónde queda Tokio"
+  "Arcanum, por qué el cielo es azul"
+
+▶ DEFINICIONES:
+  "Arcanum, qué significa idiosincrasia"
+  "Arcanum, definición de algoritmo"
+  "Arcanum, define empatía"
+
+▶ TRADUCCIÓN (a 12 idiomas):
+  "Arcanum, traduce 'buenos días' al japonés"
+  "Arcanum, cómo se dice 'gato' en alemán"
+  "Arcanum, traduce 'te amo' al francés"
+  Idiomas: inglés, francés, alemán, italiano, portugués, japonés,
+           chino, coreano, ruso, árabe, español
+
+▶ DELETREO:
+  "Arcanum, deletrea Mississippi"
+  "Arcanum, cómo se deletrea xilófono"
+
+================================================================================
+8. CONVERSIÓN Y CALCULADORA
+================================================================================
+
+▶ MATEMÁTICAS (entiende lenguaje natural):
+  "Arcanum, cuánto es 12 más 7"
+  "Arcanum, calcula 35 por 8"
+  "Arcanum, cuánto es 100 dividido por 4"
+  "Arcanum, raíz cuadrada de 144"
+  "Arcanum, factorial de 6"
+  "Arcanum, 2 elevado a 10"
+  "Arcanum, 25% de 200"
+
+▶ MONEDA:
+  "Arcanum, valor del dólar"        → vía mindicador.cl
+  "Arcanum, valor del euro"
+  "Arcanum, cuánto vale la UF"
+  "Arcanum, cuánto vale la UTM"
+  "Arcanum, cuánto es 100 dólares en pesos"
+  "Arcanum, cuánto es 50 euros en pesos"
+
+▶ UNIDADES:
+  "Arcanum, cuántos kilómetros son 10 millas"
+  "Arcanum, 25 grados celsius en fahrenheit"
+  "Arcanum, cuántas libras son 80 kilos"
+  "Arcanum, cuántos pies son 2 metros"
+  "Arcanum, cuántos cm son 5 pulgadas"
+
+================================================================================
+9. NOTAS Y LISTA DE COMPRAS
+================================================================================
+
+▶ NOTAS:
+  "Arcanum, anota: comprar entradas mañana"
+  "Arcanum, recuerda esto: clave del wifi es 1234"
+  "Arcanum, ver mis notas"
+  "Arcanum, leer mis notas"
+  "Arcanum, borrar notas"
+
+▶ LISTA DE COMPRAS:
+  "Arcanum, agrega tomates a la lista"
+  "Arcanum, agrega leche, pan y huevos a la lista"
+  "Arcanum, qué hay en mi lista"
+  "Arcanum, ver mi lista"
+  "Arcanum, limpia la lista"
+
+================================================================================
+10. DIVERSIÓN
+================================================================================
+
+  "Arcanum, cuéntame un chiste"     → 20+ chistes
+  "Arcanum, dime un dato curioso"   → 16+ fun facts
+  "Arcanum, sabías que"             → idem
+  "Arcanum, frase del día"          → frases motivacionales
+  "Arcanum, motívame"
+  "Arcanum, hálagame"               → te dice algo positivo
+  "Arcanum, dime un piropo"
+  "Arcanum, cuéntame un cuento"
+  "Arcanum, narra una historia"
+
+  "Arcanum, canta"                  → broma cantando
+  "Arcanum, beatbox"                → boots and cats
+
+▶ APIs DE INTERNET (contenido fresco cada vez):
+  "Arcanum, dato felino"            → Cat Facts API + traducción
+  "Arcanum, dato canino"            → Dog API
+  "Arcanum, dame un consejo"        → Advice Slip API
+  "Arcanum, estoy aburrido"         → Bored API (sugiere actividad)
+  "Arcanum, qué hago"
+  "Arcanum, dame trivia del 42"     → Numbers API
+  "Arcanum, bola mágica"            → Oráculo sí/no/tal vez (yesno.wtf)
+  "Arcanum, sí o no"
+  "Arcanum, dato de Chuck Norris"   → Chuck Norris API
+  "Arcanum, sorpréndeme"            → Artículo random de Wikipedia
+  
+  Los chistes y datos curiosos también se obtienen de internet
+  (icanhazdadjoke + uselessfacts) y se traducen automáticamente.
+
+================================================================================
+11. JUEGOS Y AZAR
+================================================================================
+
+  "Arcanum, lanza una moneda"       → cara o sello
+  "Arcanum, cara o sello"
+  "Arcanum, tira un dado"           → 1d6
+  "Arcanum, tira 2 dados de 20 caras"
+  "Arcanum, número aleatorio"       → 1 a 100
+  "Arcanum, número aleatorio entre 1 y 50"
+  "Arcanum, decide por mí"          → respuesta sí/no/espera
+  "Arcanum, ayúdame a decidir"
+  "Arcanum, juguemos cachipún"      → piedra papel tijera
+  "Arcanum, hazme una pregunta"     → trivia
+  "Arcanum, dime un trabalenguas"
+  "Arcanum, dime una adivinanza"
+  "Arcanum, horóscopo de leo"       → todos los signos
+  "Arcanum, qué pasó un día como hoy"  → efeméride histórica
+
+================================================================================
+12. SONIDOS AMBIENTALES
+================================================================================
+
+▶ Disponibles (vía YouTube):
+  lluvia · tormenta · bosque · mar / olas · río · fogata / fuego ·
+  ruido blanco · ruido rosa · ruido marrón · viento · cafetería ·
+  tren · ventilador · ballenas · binaural · frecuencia 432
+
+▶ Comandos:
+  "Arcanum, ponme sonido de lluvia"
+  "Arcanum, pon olas del mar"
+  "Arcanum, ruido blanco"
+  "Arcanum, sonido para dormir"
+  "Arcanum, sonido para concentrar"
+
+================================================================================
+13. BIENESTAR
+================================================================================
+
+  "Arcanum, ejercicio de respiración"
+      → te guía con la técnica 4-7-8 (calma ansiedad)
+  "Arcanum, ayúdame a relajarme"
+  "Arcanum, estoy estresado"
+  "Arcanum, quiero meditar"         → pone meditación
+  "Arcanum, dame una rutina de estiramiento"
+
+================================================================================
+14. COCINA
+================================================================================
+
+  "Arcanum, receta de pan amasado"
+  "Arcanum, cómo hago empanadas"
+  "Arcanum, ingredientes para tiramisú"
+  + (lista de compras — ver sección 9)
+
+================================================================================
+15. NOTICIAS
+================================================================================
+
+  "Arcanum, dame las noticias"        → BioBioChile
+  "Arcanum, qué noticias hay"
+  "Arcanum, titulares"
+  "Arcanum, qué pasa en el mundo"
+  "Arcanum, noticias de deportes"
+  "Arcanum, qué pasó en el fútbol"
+
+================================================================================
+17. COMUNICACIÓN
+================================================================================
+
+  "Arcanum, abre mi correo"          → Gmail
+  "Arcanum, abre calendario"         → Google Calendar
+  "Arcanum, qué tengo hoy"
+  "Arcanum, abre maps"               → Google Maps
+  "Arcanum, cómo llego a Plaza Italia"
+  "Arcanum, ruta a Viña del Mar"
+  "Arcanum, abre WhatsApp"           → WhatsApp Web
+
+================================================================================
+18. SISTEMA
+================================================================================
+
+  "Arcanum, ayuda" / "comandos"      → muestra interfaz visual
+  "Arcanum, cierra ayuda"
+  "Arcanum, captura de pantalla"     → guarda PNG en ~/
+  "Arcanum, batería"                 → si aplica
+  "Arcanum, cómo está el sistema"    → CPU, RAM, temperatura
+  "Arcanum, cuál es mi IP"           → local + pública
+  "Arcanum, estado del wifi"
+  "Arcanum, velocidad de internet"
+  "Arcanum, reinicia"                → reboot
+  "Arcanum, apaga"                   → shutdown
+
+================================================================================
+19. WIFI Y CONECTIVIDAD
+================================================================================
+
+  "Arcanum, genera QR del wifi"      → para que un invitado escanee
+  "Arcanum, comparte wifi"
+  "Arcanum, cómo me conecto al wifi"
+  "Arcanum, oculta QR"
+
+================================================================================
+20. AUTOMATIZACIÓN (modos personalizados)
+================================================================================
+
+▶ CREAR UN MODO PERSONALIZADO:
+  "Arcanum, configurar modo"
+      → Te pregunta el nombre y luego las acciones por voz, una por una.
+
+▶ EJECUTAR:
+  "Arcanum, modo Santi"
+      → Ejecuta tu rutina guardada (ej: abre YouTube + busca Super Wings)
+
+▶ GESTIONAR:
+  "Arcanum, listar modos"
+  "Arcanum, borrar modo Santi"
+
+================================================================================
+21. IDENTIDAD Y AYUDA
+================================================================================
+
+  "Arcanum, quién eres"              → presentación
+  "Arcanum, quién soy"               → reconocimiento de usuario
+  "Arcanum, hola"                    → saludo
+  "Arcanum, gracias"                 → cortesía
+  "Arcanum, habla más rápido"
+  "Arcanum, habla más lento"
+  "Arcanum, adiós" / "chao"          → despedida
+
+================================================================================
+ATAJOS DE TECLADO (cuando estás físicamente frente al Pi)
+================================================================================
+  Ctrl+Q       → Salir de Arcanum
+  ESC          → Toggle pantalla completa
+  F11          → Forzar pantalla completa
+
+================================================================================
+NOTAS FINALES
+================================================================================
+• Todas las búsquedas usan APIs gratuitas (DuckDuckGo, Wikipedia, mindicador.cl,
+  open.er-api.com, wttr.in, icanhazdadjoke, uselessfacts, catfact.ninja,
+  dogapi.dog, adviceslip.com, boredapi.com, numbersapi.com, yesno.wtf,
+  chucknorris.io). Sin keys.
+• El video (Netflix, Disney, YouTube, HBO, Prime, Paramount, Crunchyroll,
+  Zapping) se abre en KIOSK + auto-fullscreen del reproductor (te encontrarás
+  con la película directo en pantalla completa).
+• El audio (Spotify) se abre en una ventana pequeña que se MINIMIZA sola
+  para que la interfaz de Arcanum siga visible (como una app de Spotify).
+• Las radios se reproducen vía VLC en segundo plano sin abrir ventana.
+• Si Arcanum no entiende un comando corto, te lo dirá: "No te he entendido,
+  ¿puedes repetir o decir 'ayuda'?". Frases largas se buscan en internet.
+• Las traducciones usan el endpoint público de Google Translate.
+• Los modos guardados se almacenan en .modes.json
+• Las notas y listas se guardan en .notes.json
+• Los perfiles de voz se guardan en .profiles.json
+• La música de Spotify, Netflix, etc. requiere que inicies sesión la primera vez
+  (puedes hacerlo con voz: "Arcanum, inicia sesión" — guarda credenciales).
+
+¿Echas algo en falta? Crea un modo personalizado o pídelo y se agrega.
+================================================================================

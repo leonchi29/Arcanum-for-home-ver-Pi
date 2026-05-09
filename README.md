@@ -64,17 +64,24 @@ Bio Bio, Cooperativa, Rock and Pop, Futuro, Concierto, Pudahuel, Corazón, ADN, 
 - Overlay de ayuda con todos los comandos agrupados
 - Teclado en pantalla para credenciales y captchas
 
-## Instalación en Raspberry Pi 5
+## Instalación en Ubuntu Desktop 26.04 (Raspberry Pi 5)
 
 ### 1. Instalar dependencias del sistema
 ```bash
 sudo apt update
 sudo apt install -y git python3-dev python3-venv python3-tk python3-pil python3-pil.imagetk \
-  portaudio19-dev vlc chromium espeak espeak-data espeak-ng espeak-ng-data \
-  xdotool wireless-tools alsa-utils pulseaudio libatlas3-base flac \
+  portaudio19-dev vlc chromium-browser firefox espeak espeak-data espeak-ng espeak-ng-data \
+  xdotool wireless-tools network-manager alsa-utils pulseaudio pulseaudio-utils \
+  pipewire pipewire-pulse wireplumber libopenblas-dev flac \
   libjpeg-dev libpng-dev libtiff-dev libfreetype6-dev \
-  liblcms2-dev libwebp-dev zlib1g-dev libffi-dev libopenjp2-7-dev libharfbuzz-dev
+  liblcms2-dev libwebp-dev zlib1g-dev libffi-dev libopenjp2-7-dev libharfbuzz-dev \
+  fonts-inter fonts-noto-color-emoji
 ```
+
+> **Nota:** Si `chromium-browser` no se encuentra en Ubuntu 26.04, instálalo desde Snap:
+> ```bash
+> sudo snap install chromium
+> ```
 
 ### 2. Clonar el repositorio
 ```bash

@@ -487,6 +487,459 @@ INTENTS = {
             "esconde teclado", "quita teclado",
         ],
     },
+
+    # ============================================================
+    # ===== EXPANSIÓN ESTILO ALEXA / ASISTENTE COMPLETO =====
+    # ============================================================
+
+    # ----------- DIVERSIÓN -----------
+    "joke": {
+        "phrases": [
+            "cuéntame un chiste", "cuentame un chiste", "dime un chiste",
+            "chiste", "haz un chiste", "hazme un chiste",
+            "cuenta chiste", "quiero un chiste",
+        ],
+    },
+    "fun_fact": {
+        "phrases": [
+            "dato curioso", "cuéntame un dato", "cuentame un dato",
+            "dime un dato", "fun fact", "dato interesante",
+            "sabias que", "sabías que", "algo interesante",
+        ],
+    },
+    "quote": {
+        "phrases": [
+            "frase del día", "frase del dia", "dame una frase",
+            "frase motivacional", "cita motivacional", "motivame",
+            "motívame", "inspírame", "inspirame", "frase inspiradora",
+        ],
+    },
+    "compliment": {
+        "phrases": [
+            "dime algo bonito", "halágame", "halagame", "elógiame",
+            "elogiame", "dime un piropo", "dame un cumplido",
+        ],
+    },
+    "tell_story": {
+        "phrases": [
+            "cuéntame un cuento", "cuentame un cuento",
+            "cuéntame una historia", "cuentame una historia",
+            "cuento", "narra un cuento",
+        ],
+    },
+    "sing": {
+        "phrases": [
+            "canta", "cántame", "cantame", "canta una canción",
+            "canta algo", "cántame algo", "cantame algo",
+        ],
+    },
+    "beatbox": {
+        "phrases": [
+            "haz beatbox", "beatbox", "tira un beat",
+        ],
+    },
+
+    # ----------- JUEGOS / AZAR -----------
+    "flip_coin": {
+        "phrases": [
+            "lanza moneda", "tira moneda", "cara o sello", "cara o cruz",
+            "moneda al aire", "echa moneda", "lanza una moneda",
+        ],
+    },
+    "roll_dice": {
+        "phrases": [
+            "tira dados", "lanza dados", "tira un dado", "lanza un dado",
+            "dado", "dados", "echa dados", "tirar dado",
+        ],
+    },
+    "random_number": {
+        "phrases": [
+            "número aleatorio", "numero aleatorio", "número al azar",
+            "numero al azar", "dame un número", "dame un numero",
+            "elige un número", "elige un numero", "random",
+        ],
+    },
+    "decide": {
+        "phrases": [
+            "decide por mi", "decide por mí", "tu decides", "tú decides",
+            "elige tú", "elige tu", "elige por mi", "elige por mí",
+            "qué hago", "que hago", "ayúdame a decidir", "ayudame a decidir",
+        ],
+    },
+    "rock_paper_scissors": {
+        "phrases": [
+            "piedra papel tijera", "piedra papel o tijera",
+            "yan ken po", "cachipún", "cachipun",
+        ],
+    },
+
+    # ----------- CALCULADORA / MATEMÁTICAS -----------
+    "calculate": {
+        "phrases": [
+            "cuánto es", "cuanto es", "calcula", "calcular",
+            "resuelve", "resultado de", "matemática", "matematica",
+            "suma", "resta", "multiplica", "divide", "raíz cuadrada",
+            "raiz cuadrada", "elevado a", "porcentaje de", "factorial de",
+        ],
+    },
+
+    # ----------- DEFINICIONES / TRADUCCIÓN -----------
+    "definition": {
+        "phrases": [
+            "qué significa", "que significa", "significado de",
+            "definición de", "definicion de", "define",
+            "qué quiere decir", "que quiere decir",
+        ],
+    },
+    "translate": {
+        "phrases": [
+            "traduce", "traducir", "traducción de", "traduccion de",
+            "cómo se dice", "como se dice", "cómo se escribe",
+            "como se escribe en inglés", "como se escribe en ingles",
+            "cómo se escribe en inglés", "translate",
+        ],
+    },
+    "spell": {
+        "phrases": [
+            "deletrea", "cómo se deletrea", "como se deletrea",
+            "spell",
+        ],
+    },
+
+    # ----------- CONVERSIONES -----------
+    "convert_currency": {
+        "phrases": [
+            "cuánto es en dólares", "cuanto es en dolares",
+            "cuánto es en pesos", "cuanto es en pesos",
+            "cuánto es en euros", "cuanto es en euros",
+            "convertir a dólares", "convertir a dolares",
+            "convertir a pesos", "convertir a euros",
+            "tipo de cambio", "valor del dólar", "valor del dolar",
+            "valor del euro", "uf", "valor de la uf", "utm",
+        ],
+    },
+    "convert_unit": {
+        "phrases": [
+            "cuántos kilómetros son", "cuantos kilometros son",
+            "cuántas millas son", "cuantas millas son",
+            "convertir kilómetros a millas", "convertir millas a kilómetros",
+            "cuántos celsius son", "cuantos celsius son",
+            "cuántos fahrenheit son", "cuantos fahrenheit son",
+            "cuántos kilos son", "cuantos kilos son",
+            "cuántas libras son", "cuantas libras son",
+            "convertir unidades",
+        ],
+    },
+
+    # ----------- TRIVIA / CULTURA -----------
+    "trivia": {
+        "phrases": [
+            "trivia", "pregunta de trivia", "hazme una pregunta",
+            "quiz", "preguntame algo", "pregúntame algo",
+            "juega trivia", "juguemos trivia",
+        ],
+    },
+    "tongue_twister": {
+        "phrases": [
+            "trabalenguas", "dime un trabalenguas", "tres tristes tigres",
+            "trabalengua",
+        ],
+    },
+    "riddle": {
+        "phrases": [
+            "adivinanza", "dime una adivinanza", "acertijo", "dime un acertijo",
+            "adivina adivinador",
+        ],
+    },
+
+    # ----------- NOTICIAS -----------
+    "news": {
+        "phrases": [
+            "noticias", "dame las noticias", "qué noticias hay",
+            "que noticias hay", "últimas noticias", "ultimas noticias",
+            "novedades", "qué pasa en el mundo", "que pasa en el mundo",
+            "qué pasa en chile", "que pasa en chile", "titulares",
+            "noticias del día", "noticias del dia",
+        ],
+    },
+    "sports_news": {
+        "phrases": [
+            "noticias de deportes", "deportes", "fútbol", "futbol",
+            "qué pasó en el fútbol", "que paso en el futbol",
+            "resultado", "resultados", "partido", "marcador",
+        ],
+    },
+
+    # ----------- SONIDOS AMBIENTALES -----------
+    "ambient_sound": {
+        "phrases": [
+            "sonidos de", "sonido de", "ambient", "ambiental",
+            "ruido blanco", "ruido rosa", "ruido marrón", "ruido marron",
+            "lluvia", "tormenta", "bosque", "olas", "mar", "río", "rio",
+            "fogata", "fuego", "viento", "cafetería", "cafeteria",
+            "tren", "ventilador", "ballenas", "binaural", "ondas binaurales",
+            "frecuencia 432", "sonido para dormir", "sonido para concentrar",
+            "sonido relajante", "ponme lluvia", "pon lluvia", "ponme olas",
+        ],
+    },
+
+    # ----------- SALUD / BIENESTAR -----------
+    "breathing": {
+        "phrases": [
+            "ejercicio de respiración", "ejercicio de respiracion",
+            "respiración", "respiracion", "guíame respirar",
+            "guiame a respirar", "ayúdame a relajarme", "ayudame a relajarme",
+            "técnica de respiración", "tecnica de respiracion",
+            "calma", "estoy estresado", "estoy ansiosa", "estoy ansioso",
+        ],
+    },
+    "meditation": {
+        "phrases": [
+            "meditación", "meditacion", "guíame meditar", "guiame a meditar",
+            "quiero meditar", "ponme meditación",
+        ],
+    },
+    "stretch": {
+        "phrases": [
+            "estiramiento", "estírate", "estirate", "rutina de estiramiento",
+            "ejercicios de estiramiento", "estiramientos",
+        ],
+    },
+
+    # ----------- COCINA / RECETAS -----------
+    "recipe": {
+        "phrases": [
+            "receta", "receta de", "cómo hago", "como hago",
+            "cómo se prepara", "como se prepara", "cómo cocino",
+            "como cocino", "ingredientes para", "preparar",
+        ],
+    },
+    "shopping_list": {
+        "phrases": [
+            "agrega a la lista", "añade a la lista", "anota",
+            "lista de compras", "ver lista", "mi lista",
+            "borrar lista", "limpia la lista", "qué hay en mi lista",
+            "que hay en mi lista",
+        ],
+    },
+
+    # ----------- LISTAS / NOTAS / RECORDATORIOS -----------
+    "add_note": {
+        "phrases": [
+            "agrega nota", "añade nota", "guarda nota", "anota esto",
+            "toma nota", "anótalo", "anotalo", "recuerda esto",
+        ],
+    },
+    "list_notes": {
+        "phrases": [
+            "ver notas", "mis notas", "leer notas", "qué notas tengo",
+            "que notas tengo", "lee mis notas",
+        ],
+    },
+    "clear_notes": {
+        "phrases": [
+            "borra notas", "borrar notas", "elimina notas",
+            "limpia notas", "vacía notas", "vacia notas",
+        ],
+    },
+    "reminder": {
+        "phrases": [
+            "recuérdame", "recuerdame", "ponme un recordatorio",
+            "pon recordatorio", "agrega recordatorio", "agéndame",
+            "agendame",
+        ],
+    },
+
+    # ----------- COMUNICACIÓN -----------
+    "call_person": {
+        "phrases": [
+            "llama a", "llamar a", "marca a", "telefonéame",
+            "telefoneame a",
+        ],
+    },
+    "send_message": {
+        "phrases": [
+            "envía mensaje a", "envia mensaje a", "manda mensaje",
+            "manda whatsapp a", "envía whatsapp a", "envia whatsapp a",
+            "envia un texto", "envía un texto",
+        ],
+    },
+    "open_email": {
+        "phrases": [
+            "abre correo", "abre gmail", "abre mi correo",
+            "revisar correo", "ver correo", "ver mails",
+        ],
+    },
+    "open_calendar": {
+        "phrases": [
+            "abre calendario", "abre google calendar", "ver calendario",
+            "qué tengo hoy", "que tengo hoy", "agenda de hoy",
+            "mi agenda",
+        ],
+    },
+    "open_maps": {
+        "phrases": [
+            "abre maps", "abre mapas", "abre google maps",
+            "muéstrame el mapa", "muestrame el mapa",
+            "cómo llego a", "como llego a", "ruta a", "rutas a",
+            "dirección a", "direccion a",
+        ],
+    },
+
+    # ----------- SISTEMA AVANZADO -----------
+    "screenshot": {
+        "phrases": [
+            "captura de pantalla", "screenshot", "toma una captura",
+            "haz captura", "screen", "pantallazo",
+        ],
+    },
+    "battery": {
+        "phrases": [
+            "batería", "bateria", "cuánta batería", "cuanta bateria",
+            "estado de batería", "estado de bateria", "nivel de bateria",
+            "nivel de batería",
+        ],
+    },
+    "system_info": {
+        "phrases": [
+            "estado del sistema", "información del sistema",
+            "informacion del sistema", "cpu", "memoria", "ram",
+            "uso del cpu", "temperatura del sistema",
+            "cómo está el sistema", "como esta el sistema",
+        ],
+    },
+    "ip_info": {
+        "phrases": [
+            "mi ip", "cuál es mi ip", "cual es mi ip", "ip pública",
+            "ip publica", "dirección ip", "direccion ip",
+            "información de red", "informacion de red",
+        ],
+    },
+    "wifi_status": {
+        "phrases": [
+            "estado del wifi", "cómo está el wifi", "como esta el wifi",
+            "señal del wifi", "senal del wifi", "calidad del wifi",
+        ],
+    },
+    "speedtest": {
+        "phrases": [
+            "test de velocidad", "velocidad de internet",
+            "speedtest", "qué tan rápido va internet",
+            "que tan rapido va internet",
+        ],
+    },
+
+    # ----------- HORÓSCOPO / EFEMÉRIDES -----------
+    "horoscope": {
+        "phrases": [
+            "horóscopo", "horoscopo", "mi signo", "mi horóscopo",
+            "horóscopo de", "horoscopo de",
+        ],
+    },
+    "this_day": {
+        "phrases": [
+            "qué pasó un día como hoy", "que paso un dia como hoy",
+            "efemérides", "efemerides", "qué pasó hoy en la historia",
+            "que paso hoy en la historia", "este día en la historia",
+            "este dia en la historia",
+        ],
+    },
+
+    # ----------- USUARIO / VOZ -----------
+    "who_am_i": {
+        "phrases": [
+            "quién soy", "quien soy", "me reconoces", "sabes quién soy",
+            "sabes quien soy", "identifícame", "identificame",
+        ],
+    },
+    "who_are_you": {
+        "phrases": [
+            "quién eres", "quien eres", "qué eres", "que eres",
+            "preséntate", "presentate", "quién es arcanum",
+            "quien es arcanum",
+        ],
+    },
+    "tts_speed_up": {
+        "phrases": [
+            "habla más rápido", "habla mas rapido", "más rápido al hablar",
+            "mas rapido al hablar", "acelera tu voz",
+        ],
+    },
+    "tts_speed_down": {
+        "phrases": [
+            "habla más lento", "habla mas lento", "más despacio",
+            "mas despacio", "habla pausado",
+        ],
+    },
+
+    # ----------- DESPEDIDA -----------
+    "goodbye": {
+        "phrases": [
+            "adiós", "adios", "chao", "chau", "hasta luego",
+            "nos vemos", "bye", "goodbye", "hasta la próxima",
+            "hasta la proxima",
+        ],
+    },
+
+    # ============================================================
+    # ===== CONTENIDO DE INTERNET (APIs gratis) =====
+    # ============================================================
+    "cat_fact": {
+        "phrases": [
+            "dato de gatos", "dato felino", "cuéntame algo de gatos",
+            "cuentame algo de gatos", "fact gato", "curiosidad de gatos",
+            "info de gatos",
+        ],
+    },
+    "dog_fact": {
+        "phrases": [
+            "dato de perros", "dato canino", "cuéntame algo de perros",
+            "cuentame algo de perros", "fact perro", "curiosidad de perros",
+            "info de perros",
+        ],
+    },
+    "advice": {
+        "phrases": [
+            "dame un consejo", "consejo", "qué consejo me das",
+            "que consejo me das", "necesito un consejo",
+            "aconséjame", "aconsejame",
+        ],
+    },
+    "activity": {
+        "phrases": [
+            "estoy aburrido", "estoy aburrida", "qué hago",
+            "que hago", "no sé qué hacer", "no se que hacer",
+            "sugiéreme algo", "sugiereme algo", "dame una idea",
+            "qué puedo hacer", "que puedo hacer",
+        ],
+    },
+    "number_trivia": {
+        "phrases": [
+            "dato del número", "dato del numero", "trivia del número",
+            "trivia del numero", "qué tiene el número", "que tiene el numero",
+            "dato de un número", "dame un número curioso",
+        ],
+    },
+    "yes_no_oracle": {
+        "phrases": [
+            "bola mágica", "bola magica", "oráculo", "oraculo",
+            "responde sí o no", "responde si o no", "si o no",
+            "sí o no", "dime sí o no", "pregunta del oráculo",
+        ],
+    },
+    "chuck_norris": {
+        "phrases": [
+            "chuck norris", "dato de chuck norris", "fact de chuck",
+            "cuéntame algo de chuck", "cuentame algo de chuck",
+        ],
+    },
+    "wiki_random": {
+        "phrases": [
+            "artículo aleatorio", "articulo aleatorio",
+            "wikipedia aleatorio", "algo de wikipedia",
+            "sorpréndeme", "sorprendeme",
+        ],
+    },
 }
 
 
